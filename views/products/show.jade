@@ -1,0 +1,61 @@
+div#content.full_page_layout
+  div.main
+    article#product
+      div.product_image_module.module
+        div#carousel
+          div.product_main_image_container
+            ul
+              each image, index in product.images
+                li
+                  a.image_item(href=imageUriForSize(image.href, 'original'))
+                    img(src=imageUriForSize(image.href, 'normal'), step=index + 1, class=(index === 0 ? 'shown_image' : 'hidden_image'), id='image_#{index+1}')
+          div.browsable
+            ul
+              each image, index in product.images
+                li
+                  a.carousel_item(href=imageUriForSize(image.href, 'original'), step=index + 1)
+                    img(src=imageUriForSize(image.href, 'thumb'), id='image_#{index+1}_small', class=(index === 0 ? 'carousel_selected': ''))
+
+      div.product_header_module.module
+        h1.product_title= product.title
+        h2.by by 
+          a(href='http://www.notonthehighstreet.com/#{product.partner.shortcode}')= product.partner.name
+        div#price_reviews
+          span#price
+            each price in product.prices
+              span(class='currency_#{price.currency}', data-base-price=(price.amount / 100), data-current-price=(price.amount / 100))
+                != formatMoney(price.amount, price.currency)
+          div.stars
+            div
+              - for (var x = 0; x < product.product_rating; x++)
+                img(src='http://cdn3.notonthehighstreet.com/images/products/reviews/icons/star_full.png')
+              - for (var x = 0; x < 5 - product.product_rating; x++)
+                img(src='http://cdn3.notonthehighstreet.com/images/products/reviews/icons/star_empty.png')
+            div.customer_reviews_counter
+              span.mobile_hide #{product.number_of_reviews} customer reviews
+
+      div.product_purchase_module.module
+        form(accept-charset='UTF-8', action='?_method=PUT', method='POST')
+          input(type='hidden', name='_method', value='PUT')
+          div.fields.product_options_fields
+            ul#product_options
+              each option in product.options
+                li.field.product_option_field.stringish
+                  span.inputs
+                    if option.type === 'selection'
+                      select.select_option.select.product_select_box.required(name='option[#{option.id}]')
+                        option(value='')= option.name
+                        each value in option.values
+                          option(value=value.id)= value.name
+                    if option.type === 'personalisation'
+                      label.label= option.name
+                      input.customer_defined_option.input.required(name='option[#{option.id}]', type='text')
+          div.product_buttons
+            div.qty
+              label(for='qty') quantity
+              input#qty.quantity_input(name='qty', type='text', value='1')
+            span.icon_input.left_side
+              input#add_to_cart.add_to_cart_button.button.large.primary(name='add_to_cart', value='add to basket', type='submit')
+              span.icon.small.basket
+
+div#zoom_container.hidden

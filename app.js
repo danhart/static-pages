@@ -3,12 +3,15 @@ var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var methodOverride = require('method-override');
 var lessMiddleware = require('less-middleware');
 var bodyParser = require('body-parser');
 var layoutFetcher = require('layout-fetcher');
 
 var appConfig = require('./app-config');
 var routes = require('./routes/index');
+var productsRoutes = require('./routes/products');
+var moneyHelper = require('./view-helpers/money-helper');
 
 var layoutService = require('./services/layout-service');
 
@@ -22,6 +25,7 @@ app.use(favicon());
 
 app.use(logger(appConfig.loggerMode));
 
+app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
@@ -38,7 +42,11 @@ app.use(layoutFetcher({
     }
 }));
 
+app.locals.formatMoney = moneyHelper.formatMoney;
+app.locals.symbolForCurrency = moneyHelper.symbolForCurrency;
+
 app.use('/', routes);
+app.use('/products', productsRoutes);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

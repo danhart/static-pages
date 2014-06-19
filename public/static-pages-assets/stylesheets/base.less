@@ -1,0 +1,349 @@
+@import "staple";
+@import "utils";
+@import "variables";
+
+/* ==================================================================
+   grids
+   ================================================================== */
+
+#noths {
+
+    /* -  Site container
+    ------------------------------------------------------------------
+    */
+    .site_container(){
+        #staple > .site_container(@standard_column_width, @standard_column_gutter, @standard_outer_container_gutter);
+    }
+
+    .add_container_gutter(){
+        #staple > .add_container_gutter(@standard_outer_container_gutter);
+    }
+
+    .add_mobile_container_gutter(){
+        #staple > .add_container_gutter(@mobile_outer_container_gutter);
+    }
+
+    .pad_container_gutter(){
+        #staple > .pad_container_gutter(@standard_outer_container_gutter);
+        @media @mobile {
+            #staple > .pad_container_gutter(@mobile_outer_container_gutter);
+        }
+    }
+
+    .position_inside_left_container_gutter(){
+        #staple > .position_inside_left_container_gutter(@standard_outer_container_gutter);
+    }
+    .position_inside_right_container_gutter(){
+        #staple > .position_inside_right_container_gutter(@standard_outer_container_gutter);
+    }
+
+    .container_column(@number_of_columns: 1) {
+        #staple > .container_column(@number_of_columns, @standard_column_width, @standard_column_gutter);
+    }
+
+    /* -  full content mixins
+    ------------------------------------------------------------------
+    */
+    .full_content_width(){
+        #staple > .full_content_width(@standard_column_width, @standard_column_gutter);
+    }
+
+    .full_width_for_mobile(){
+        #staple > .full_width_for_mobile;
+    }
+
+    .mobile_container_width(){
+        #staple > .mobile_container_width(@mobile_site_container_width);
+    }
+
+    /* -  module mixins
+    ------------------------------------------------------------------
+    */
+    .module_column(@number_of_columns: 1) {
+        #staple > .module_column(@number_of_columns, @standard_column_width, @standard_column_gutter);
+    }
+    .module_column_with_final_gutter(@number_of_columns: 1) {
+        #staple > .module_column_with_final_gutter(@number_of_columns, @standard_column_width, @standard_column_gutter);
+    }
+    .mobile_module_column_with_final_gutter(@number_of_columns:1){
+        #staple > .mobile_module_column_with_final_gutter(@number_of_columns, @mobile_column_width, @mobile_column_gutter);
+    }
+    .mobile_module_column(@number_of_columns: 1) {
+        #staple > .mobile_module_column(@number_of_columns, @mobile_column_width, @mobile_column_gutter);
+    }
+    .full_column_module_for_mobile(){
+        #staple > .full_column_module_for_mobile;
+    }
+    .full_content_width_module(){
+        #staple > .full_content_width_module(@standard_column_width, @standard_column_gutter);
+        &.module {
+            #staple > .full_width_for_mobile;
+        }
+    }
+
+    /* -  column mixins
+    ------------------------------------------------------------------
+    */
+    .column(@number_of_columns: 1) {
+        #staple > .column(@number_of_columns, @standard_column_width, @standard_column_gutter);
+    }
+    .mobile_column(@number_of_columns: 1) {
+        #staple > .mobile_column(@number_of_columns, @mobile_column_width, @mobile_column_gutter);
+    }
+    .mobile_column_without_final_gutter(@number_of_columns: 1) {
+        #staple > .mobile_column_without_final_gutter(@number_of_columns, @mobile_column_width, @mobile_column_gutter);
+    }
+
+    .column_without_final_gutter(@number_of_columns: 1) {
+        #staple > .column_without_final_gutter(@number_of_columns, @standard_column_width, @standard_column_gutter);
+    }
+    .column_including_final_gutter(@number_of_columns: 1) {
+        #staple > .column_including_final_gutter(@number_of_columns, @standard_column_width, @standard_column_gutter);
+    }
+    .column_with_final_gutter(@number_of_columns: 1) {
+        #staple > .column_with_final_gutter(@number_of_columns, @standard_column_width, @standard_column_gutter);
+    }
+
+    .gutter_width(){
+        #staple > .gutter_width(@standard_column_gutter);
+    }
+    .mobile_gutter_width(){
+        #staple > .mobile_gutter_width(@mobile_column_gutter);
+    }
+
+
+    /* -  push mixins
+    ------------------------------------------------------------------
+    */
+    .push_left(@number_of_columns: 1){
+        #staple > .push_left(@number_of_columns, @standard_column_width, @standard_column_gutter);
+    }
+    .push_left_without_final_gutter(@number_of_columns: 1){
+        #staple > .push_left_without_final_gutter(@number_of_columns, @standard_column_width, @standard_column_gutter);
+    }
+    .push_right(@number_of_columns: 1){
+        #staple > .push_right(@number_of_columns, @standard_column_width, @standard_column_gutter);
+    }
+    .push_bottom(@number_of_columns: 1){
+        #staple > .push_bottom(@number_of_columns, @standard_column_width, @standard_column_gutter);
+    }
+
+    .pull_top() {
+        #staple > .pull_top(@standard_column_gutter);
+    }
+
+    .pull_out_into_left_container_gutter() {
+        #staple > .pull_out_into_left_container_gutter(@standard_column_gutter);
+    }
+    .mobile_pull_out_into_left_container_gutter() {
+        #staple > .pull_out_into_left_container_gutter(@mobile_column_gutter * 2);
+    }
+
+    .mobile_pull_out_into_container_gutter() {
+        #staple > .pull_out_into_left_container_gutter(@mobile_column_gutter * 2);
+        #staple > .pull_out_into_right_container_gutter(@mobile_column_gutter * 2);
+    }
+
+    /* -  gutter mixins
+    ------------------------------------------------------------------
+    */
+    .pad_sides_with_gutter(@vertical_padding:0){
+        #staple > .pad_sides_with_gutter(@standard_column_gutter, @vertical_padding);
+    }
+    .pad_right_with_gutter(@multiple:1){
+        #staple > .pad_right_with_gutter(@standard_column_gutter, @multiple);
+    }
+    .pad_left_with_gutter(@multiple:1){
+        #staple > .pad_left_with_gutter(@standard_column_gutter, @multiple);
+    }
+    .pad_with_gutter(@multiple:1){
+        #staple > .pad_with_gutter(@standard_column_gutter, @multiple);
+    }
+    .mobile_pad_with_gutter(@multiple:1){
+        #staple > .pad_with_gutter(@multiple * @mobile_column_gutter);
+    }
+    .pad_top_with_gutter(@multiple:1){
+        #staple > .pad_top_with_gutter(@standard_column_gutter, @multiple);
+    }
+    .mobile_pad_top_with_gutter(@multiple:2){
+        #staple > .pad_top_with_gutter(@multiple * @mobile_column_gutter);
+    }
+    .pad_bottom_with_gutter(@multiple:1){
+        #staple > .pad_bottom_with_gutter(@standard_column_gutter, @multiple);
+    }
+    .mobile_pad_bottom_with_gutter(@multiple:2){
+        #staple > .pad_bottom_with_gutter(@multiple, @mobile_column_gutter);
+    }
+    .mobile_pad_right_with_gutter(@multiple:1){
+        #staple > .pad_right_with_gutter(@mobile_column_gutter, @multiple);
+    }
+    .mobile_pad_left_with_gutter(@multiple:1){
+        #staple > .pad_left_with_gutter(@mobile_column_gutter, @multiple);
+    }
+    .mobile_pad_sides_with_gutter(@multiple:1){
+        #staple > .pad_right_with_gutter(@mobile_column_gutter, @multiple);
+        #staple > .pad_left_with_gutter(@mobile_column_gutter, @multiple);
+    }
+    .add_bottom_gutter(@multiple:1){
+        #staple > .add_bottom_gutter(@standard_column_gutter, @multiple);
+    }
+    .add_top_gutter(@multiple:1){
+        #staple > .add_top_gutter(@standard_column_gutter, @multiple);
+    }
+    .add_right_gutter(@multiple:1){
+        #staple > .add_right_gutter(@standard_column_gutter, @multiple);
+    }
+    .add_left_gutter(@multiple:1){
+        #staple > .add_left_gutter(@standard_column_gutter, @multiple);
+    }
+    .add_side_gutter(){
+        #staple > .add_left_gutter(@standard_column_gutter, 1);
+        #staple > .add_right_gutter(@standard_column_gutter, 1);
+    }
+    .mobile_add_side_gutter(){
+        #staple > .add_left_gutter(@mobile_column_gutter, 2);
+        #staple > .add_right_gutter(@mobile_column_gutter, 2);
+    }
+    .mobile_add_left_gutter(){
+        #staple > .add_left_gutter(@mobile_column_gutter, 2);
+    }
+    .mobile_add_right_gutter(){
+        #staple > .add_right_gutter(@mobile_column_gutter, 2);
+    }
+    .mobile_add_bottom_gutter(){
+        #staple > .add_bottom_gutter(@mobile_column_gutter, 2);
+    }
+    .mobile_add_top_gutter(){
+        #staple > .add_top_gutter(@mobile_column_gutter, 2);
+    }
+    .no_bottom_gutter_for_last_child(){
+        #staple > .no_bottom_gutter_for_last_child;
+    }
+}
+
+/* ==================================================================
+    utility mixins
+   ================================================================== */
+#noths {
+    .box_shadow(@x: 2px, @y: -2px, @blur:2px, @colour: @box_shadow_colour){
+        #utils > .box_shadow(@x, @y, @blur, @colour);
+    }
+    .box_shadow_with_spread(@x: 2px, @y: -2px, @blur: 2px, @spread: 0, @colour: @box_shadow_colour){
+        #utils > .box_shadow_with_spread(@x, @y, @blur, @spread, @colour);
+    }
+    .two_box_shadows(@shadow1, @shadow2){
+        -webkit-box-shadow: @shadow1, @shadow2;
+           -moz-box-shadow: @shadow1, @shadow2;
+                box-shadow: @shadow1, @shadow2;
+    }
+
+    // Deprecated - use .inner_shadow instead
+    .inner_box_shadow (@colour: #949492, @x: 0, @y: 0, @blur: 5px, @spread: 0){
+        #utils > .inner_shadow(@colour, @x, @y, @blur, @spread);
+    }
+    .no_box_shadow(){
+        #utils > .no_box_shadow();
+    }
+    .inner_shadow (@colour: #949492, @x: 0, @y: 0, @blur: 5px, @spread: 0){
+        #utils > .inner_shadow(@colour, @x, @y, @blur, @spread);
+    }
+    .border_radius(@radius: 6px){
+        #utils > .border_radius(@radius);
+    }
+    .border_bottom_radius(@radius: 6px){
+        #utils > .border_bottom_radius(@radius);
+    }
+    .border_left_radius(@radius: 6px){
+        #utils > .border_left_radius(@radius);
+    }
+    .border_right_radius(@radius: 6px){
+        #utils > .border_right_radius(@radius);
+    }
+    .border_bottom_right_radius(@radius: 6px){
+        #utils > .border_bottom_right_radius(@radius);
+    }
+    .border_top_radius(@radius: 6px){
+        #utils > .border_top_radius(@radius);
+    }
+    .border_top_right_radius(@radius: 6px){
+        #utils > .border_top_right_radius(@radius);
+    }
+    .border_top_left_radius(@radius: 6px){
+        #utils > .border_top_left_radius(@radius);
+    }
+    .box_sizing(@sizing: border-box) {
+        #utils > .box_sizing(@sizing);
+    }
+    .opacity(@opacity: 0.5){
+        #utils > .opacity(@opacity);
+    }
+    .opacity_for_non_ie(@opacity: 0.5){
+        #utils > .opacity_for_non_ie(@opacity);
+    }
+    .show_hide {
+        #utils > .show_hide;
+    }
+    #linear_gradient {
+        .vertical(@start_colour: #FFF, @end_colour: #CCC) {
+            #utils > #linear_gradient > .vertical(@start_colour, @end_colour);
+        }
+        .horizontal(@start_colour: #FFF, @end_colour: #CCC) {
+            #utils > #linear_gradient > .horizontal(@start_colour, @end_colour);
+        }
+        .vertical_three_colours(@start_colour: #FFF, @mid_colour: #DDD, @colour_stop: 0.5, @end_colour: #CCC) {
+            #utils > #linear_gradient > .vertical_three_colours(@start_colour, @mid_colour, @colour_stop, @end_colour);
+        }
+    }
+    .hide_text {
+        #utils > .hide_text;
+    }
+    .rotate(@degree) {
+        #utils > .rotate(@degree);
+    }
+    .triangle_shape(@orientation: left, @fill_color: @light_primary_color, @size: 9px) {
+        #utils > #shapes > .triangle_shape(@orientation, @fill_color, @size);
+    }
+    .centered_triangle(@orientation: left, @fill_color: @light_primary_color, @size: 9px) {
+        #utils > #shapes > .centered_triangle(@orientation, @fill_color, @size);
+    }
+    .centered_triangle_fill_color(@orientation: left, @fill_color) {
+        #utils > #shapes > .centered_triangle_fill_color(@orientation, @fill_color);
+    }
+}
+/* ==================================================================
+   brand
+   ================================================================== */
+#noths {
+    /* -  borders and shadows
+    ------------------------------------------------------------------
+    */
+
+    .solid_drop_shadow(@shadow_color: @sidebar_module_border_color) {
+        #noths > .box_shadow(3px, 3px , 0px, @shadow_color);
+    }
+
+    .solid_transparent_drop_shadow {
+        #noths > .solid_drop_shadow(@tertiary_grey_rgba);
+    }
+
+    .solid_selected_drop_shadow {
+        #noths > .solid_drop_shadow(@noths_link_color);
+    }
+
+    .standard_bottom_border {
+        border-bottom: 1px solid @standard_divider_color;
+    }
+
+    .standard_horizontal_borders {
+        border-bottom: 1px solid @standard_divider_color;
+        border-top: 1px solid @standard_divider_color;
+    }
+
+
+    /* -  text
+    ------------------------------------------------------------------
+    */
+    .link_color {
+        color: @standard_link_color;
+    }
+}

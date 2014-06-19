@@ -1,0 +1,329 @@
+/* ==================================================================
+   media queries
+    - If you change any of these values then you must also update them
+    in the css_helper.rb
+   ================================================================== */
+
+/* Medium devices (tablets, 768px and up) (current desktop) */
+@screen-m:    ~"(min-device-width: 768px)";
+/* Smaller than medium devices (current mobile) */
+@screen-lt-m: ~"(max-device-width: 767px)";
+
+/* Large devices (desktops, 992px and up) */
+@screen-l:    ~"(min-device-width: 992px)";
+/* Smaller than large devices */
+@screen-lt-l: ~"(max-device-width: 991px)";
+
+/* Extra Large devices (large desktops, 1200px and up) */
+@screen-xl:    ~"(min-device-width: 1200px)";
+/* Smaller than Extra Large devices */
+@screen-lt-xl: ~"(max-device-width: 1199px)";
+
+@mobile: @screen-lt-m;
+@desktop: @screen-m;
+
+/* ==================================================================
+   grids
+   ================================================================== */
+
+#staple {
+    // n columns (with column gutters) + 2 outer gutters
+    @number_of_columns: 12;
+
+    /* -  Site container
+    ------------------------------------------------------------------
+    Sets the body container to the defined no of columns
+    & outer container gutter
+    */
+
+    .site_container(@column_width, @gutter, @outer_container_gutter){
+        @site_content_width: ((@column_width + @gutter) * @number_of_columns);
+        width: @site_content_width + (2 * @outer_container_gutter);
+    }
+
+    /* -  used for the main container to add outer margin
+    ..................................................................
+    */
+    .add_container_gutter(@container_gutter){
+        margin-left: @container_gutter;
+        margin-right: @container_gutter;
+    }
+
+    /* -  used for the main container to add outer padding
+    ..................................................................
+    */
+    .pad_container_gutter(@container_gutter){
+        padding-left: @container_gutter;
+        padding-right: @container_gutter;
+    }
+
+    /* -   should only be used on containers e.g. .main & .side
+           and not modules
+    ..................................................................
+    */
+    .container_column(@number_of_columns: 1, @column_width, @gutter) {
+        width: @number_of_columns * (@column_width + @gutter);
+        padding-right: @gutter;
+    }
+
+    /* -  full content mixins
+    ------------------------------------------------------------------
+    Sets the width to be the full width of the content area
+    */
+
+    .full_content_width(@column_width, @gutter){
+        @site_content_width: ((@column_width + @gutter) * @number_of_columns);
+        width: @site_content_width;
+    }
+
+    .full_width_for_mobile(){
+        @media @mobile {
+            width: 100%;
+        }
+    }
+
+    .mobile_container_width(@mobile_site_container_width){
+        @media @mobile {
+            width: 100%;
+        }
+    }
+
+    /* -  column mixins
+    ------------------------------------------------------------------
+    for setting the modules to defined grid
+    */
+
+    /* -  standard grid column definer
+    ..................................................................
+    */
+    .column(@number_of_columns: 1, @column_width, @gutter) {
+        .column_without_final_gutter(@number_of_columns, @column_width, @gutter)
+    }
+
+    /* -  standard mobile grid column definer
+    ..................................................................
+    */
+    .mobile_column(@number_of_columns: 1, @column_width, @gutter) {
+        @media @mobile {
+            width: (@number_of_columns * (@column_width + @gutter));
+        }
+    }
+
+    /* -  standard grid column definer for modules
+          this should be used for .modules
+    ..................................................................
+    */
+    .module_column(@number_of_columns: 1, @column_width, @gutter) {
+        .column(@number_of_columns, @column_width, @gutter)
+    }
+
+    /* -  used when a module isn't full width on mobile
+          this should be used for .modules
+    ..................................................................
+    */
+    .mobile_module_column(@number_of_columns: 1, @column_width, @gutter) {
+        &.module {
+            .mobile_column(@number_of_columns, @column_width, @gutter)
+        }
+    }
+
+    /* -
+    ..................................................................
+    */
+    .full_column_module_for_mobile(){
+        &.module {
+            @media @mobile {
+                width: 100%;
+            }
+        }
+    }
+
+    /* -  used when a module isn't full width on mobile
+          this should be used for .modules
+    ..................................................................
+    */
+    .full_content_width_module(@column_width, @gutter){
+        &.module {
+            @site_content_width: ((@column_width + @gutter) * @number_of_columns);
+            width: @site_content_width;
+        }
+    }
+
+    /* -  generally only used by .column and not called directly;
+          the default grid behaviour
+   ..................................................................
+   */
+    .column_without_final_gutter(@number_of_columns: 1, @column_width, @gutter) {
+        width: (@number_of_columns * (@column_width + @gutter)) - @gutter;
+    }
+
+    .mobile_column_without_final_gutter(@number_of_columns: 1, @column_width, @gutter) {
+        @media @mobile {
+            .column_without_final_gutter(@number_of_columns, @column_width, @gutter);
+        }
+    }
+
+    /* -  used when the final gutter isn't required
+         e.g. when you want a module to overlap into the gutter
+         such as in certain side column modules
+    ..................................................................
+    */
+    .column_including_final_gutter(@number_of_columns: 1, @column_width, @gutter) {
+        width: (@number_of_columns * (@column_width + @gutter));
+    }
+
+    .column_with_final_gutter(@number_of_columns: 1, @column_width, @gutter) {
+        width: (@number_of_columns * (@column_width + @gutter)) - @gutter;
+        margin-right: @gutter;
+
+    }
+
+    .module_column_with_final_gutter(@number_of_columns: 1, @column_width, @gutter) {
+        .column_with_final_gutter(@number_of_columns, @column_width, @gutter);
+    }
+
+    .mobile_module_column_with_final_gutter(@number_of_columns: 1, @column_width, @gutter) {
+        @media @mobile {
+            .column_without_final_gutter(@number_of_columns, @column_width, @gutter);
+            margin-right: @gutter;
+        }
+    }
+
+    /* -  generally shouldn't be used. mainly for debug
+    ..................................................................
+    */
+    .gutter_width(@gutter){
+        width: @gutter;
+    }
+    .mobile_gutter_width(@gutter){
+        @media @mobile {
+            width: @gutter;
+        }
+    }
+
+    /* -  push mixins
+    ------------------------------------------------------------------
+    for indenting the modules to defined grid
+    */
+
+    /* -  indents a module by n number of columns
+    ..................................................................
+    */
+    .push_left(@number_of_columns: 1, @column_width, @gutter) {
+        padding-left: @number_of_columns * (@column_width + @gutter);
+        @media @mobile {
+            padding-left: 0;
+        }
+    }
+
+    /* -  same as .push_left but omits the final gutter space
+    ..................................................................
+    */
+    .push_left_without_final_gutter(@number_of_columns: 1, @column_width, @gutter) {
+        padding-left: @number_of_columns * (@column_width + @gutter) - @gutter;
+        @media @mobile {
+            padding-left: 0;
+        }
+    }
+
+    /* -  adds n amount of columns to the right-side of a module
+    ..................................................................
+    */
+    .push_right(@number_of_columns: 1, @column_width, @gutter) {
+        padding-right: @number_of_columns * (@column_width + @gutter);
+        @media @mobile {
+            padding-right: 0;
+        }
+    }
+
+    /* -  adds n amount of columns to the right-side of a module
+    ..................................................................
+    */
+    .push_bottom(@number_of_columns: 1, @column_width, @gutter) {
+        margin-bottom: @number_of_columns * (@column_width);
+        @media @mobile {
+            margin-bottom: 0;
+        }
+    }
+
+    .pull_top(@gutter) {
+        margin-top: -@gutter;
+    }
+
+    .pull_out_into_left_container_gutter(@container_gutter) {
+        margin-left: -@container_gutter;
+    }
+
+    .pull_out_into_right_container_gutter(@container_gutter) {
+        margin-right: -@container_gutter;
+    }
+
+
+    /* -  for correctly positioning a module inside the content
+          container when the module is absolutely positioned
+    ..................................................................
+    */
+    .position_inside_left_container_gutter(@container_gutter){
+        left: @container_gutter;
+    }
+    .position_inside_right_container_gutter(@container_gutter){
+        right: @container_gutter;
+    }
+
+    /* -  gutter mixins
+    ------------------------------------------------------------------
+    for providing gutter space for modules
+    */
+
+    /* -  used for adding gutter to a module
+          e.g. to add internal gutter when a module is boxed
+    ..................................................................
+    */
+    .pad_sides_with_gutter(@gutter, @vertical_padding: 0){
+        padding: @vertical_padding @gutter;
+    }
+
+    /* -  used for adding gutter to a module
+          e.g. to add internal gutter when a module is boxed
+    ..................................................................
+    */
+    .pad_with_gutter(@gutter, @multiple:1){
+        padding: @gutter * @multiple;
+    }
+
+    .pad_right_with_gutter(@gutter, @multiple:1){
+        padding-right: @gutter * @multiple;
+    }
+    .pad_left_with_gutter(@gutter, @multiple:1){
+        padding-left: @gutter * @multiple;
+    }
+
+    .pad_top_with_gutter(@gutter, @multiple:1){
+        padding-top: @gutter * @multiple;
+    }
+
+    .pad_bottom_with_gutter(@gutter, @multiple){
+        padding-bottom: @multiple * @gutter;
+    }
+
+    .add_bottom_gutter(@gutter, @multiple){
+        margin-bottom: @multiple * @gutter;
+    }
+
+    .add_top_gutter(@gutter, @multiple){
+        margin-top: @multiple * @gutter;
+    }
+
+    .add_right_gutter(@gutter, @multiple){
+        margin-right: @multiple * @gutter;
+    }
+    .add_left_gutter(@gutter, @multiple){
+        margin-left: @multiple * @gutter;
+    }
+
+    .no_bottom_gutter_for_last_child(){
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

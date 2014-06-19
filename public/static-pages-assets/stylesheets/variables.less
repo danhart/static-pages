@@ -1,0 +1,324 @@
+/* ==================================================================
+   brand/site variables
+   ================================================================== */
+
+/* -  colours
+------------------------------------------------------------------
+*/
+@standard_primary_color: #0a89af;
+@light_primary_color: #0ca6d4;
+@dark_primary_color: #056582;
+
+/* secondary sidebar module background color */
+@primary_grey: #f6f5f3;
+/* secondary sidebar module wonky background color & border on modules */
+@secondary_grey: #eae8e6;
+/*module/controls border/key line color */
+@tertiary_grey: #d6d2ce;
+@tertiary_grey_rgba: rgba(174, 165, 156, 0.5);
+
+
+@noths_link_color: @light_primary_color;
+@noths_grey_link_color: @grey_dark;
+@standard_secondary_color: @dark_primary_color;
+
+@text_input_placeholder_color: #cecece;
+
+// E2TODO: marked for removal
+// ------------------------------------------------------------------
+@noths_blue: @noths_link_color;
+@dark_brown: #BAB4AD;
+@grey_brown: #C6C3C1;
+@grey_lighter: #999;
+@grey_light: #666;
+@grey: #707071;
+@grey_dark: #555;
+@grey_darker: #434343;
+@light_brown: #EAE7E3;
+@darker_brown: #6D6A62;
+@dark_blue: @dark_primary_color;
+
+
+/* -  backgrounds
+------------------------------------------------------------------
+*/
+@body_background_color: #fff;
+@box_background_color: #ddd;
+@standard_box_module_background_color: @primary_grey;
+
+/* -  borders and shadows
+------------------------------------------------------------------
+*/
+@standard_box_module_border_color: @secondary_grey;
+@sidebar_module_border_color: @tertiary_grey;
+@standard_divider_color: @secondary_grey;
+
+
+/* -  department colours
+------------------------------------------------------------------
+*/
+// todo: the secondary colours could potentially be derived from
+//       the primary colours via LESS colour functions
+
+@standard_primary_dept_color:   @dark_primary_color;
+@standard_secondary_dept_color: @standard_secondary_color;
+
+@home_primary_color:            #614661;
+@home_secondary_color:          #b99fb3;
+
+@garden_primary_color:          #388501;
+@garden_secondary_color:        #78b800;
+
+@fashion_primary_color:         #6f838e;
+@fashion_secondary_color:       #acc0c7;
+
+@jewellery_primary_color:       #385a79;
+@jewellery_secondary_color:     #9bb0c4;
+
+@baby-child_primary_color:      #47bd9b;
+@baby-child_secondary_color:    #8ee8cf;
+
+@art_primary_color:             #99464e;
+@art_secondary_color:           #c4878c;
+
+@gifts_primary_color:           #e34913;
+@gifts_secondary_color:         #fe906f;
+
+@weddings_primary_color:        #29bfb3;
+@weddings_secondary_color:      #07927f;
+
+@health-beauty_primary_color:   #c8263b;
+@health-beauty_secondary_color: #e1889b;
+
+@food-drink_primary_color:      #973912;
+@food-drink_secondary_color:    #f3bf98;
+
+@pets_primary_color:            #004289;
+@pets_secondary_color:          #0082b6;
+
+@sale_primary_color:            #c40505;
+@sale_secondary_color:          #d95c5c;
+
+@christmas_primary_color:       #d4232b;
+@christmas_secondary_color:     #d4232b;
+
+@men_primary_color:             #082b44;
+@men_secondary_color:           #475965;
+
+@women_primary_color:           #db3f6e;
+@women_secondary_color:         #b42e55;
+
+// DE Department colours
+@wohnen_primary_color:      @home_primary_color;
+@wohnen_secondary_color:    @home_secondary_color;
+
+@geschenke_primary_color:   @gifts_primary_color;
+@geschenke_secondary_color: @gifts_secondary_color;
+
+@baby-kind_primary_color:   @baby-child_primary_color;
+@baby-kind_secondary_color: @baby-child_secondary_color;
+
+@herren_primary_color:      @men_primary_color;
+@herren_secondary_color:    @men_secondary_color;
+
+@damen_primary_color:       @women_primary_color;
+@damen_secondary_color:     @women_secondary_color;
+
+
+/* -  hat band colours
+------------------------------------------------------------------
+*/
+@standard_hat_band_color:       @standard_primary_dept_color;
+@home_hat_band_color:           @home_primary_color;
+@garden_hat_band_color:         @garden_primary_color;
+@fashion_hat_band_color:        @fashion_primary_color;
+@jewellery_hat_band_color:      @jewellery_primary_color;
+@baby-child_hat_band_color:     @baby-child_primary_color;
+@art_hat_band_color:            @art_primary_color;
+@gifts_hat_band_color:          @gifts_primary_color;
+@weddings_hat_band_color:       @weddings_primary_color;
+@health-beauty_hat_band_color:  @health-beauty_primary_color;
+@food-drink_hat_band_color:     @food-drink_primary_color;
+@pets_hat_band_color:           @pets_primary_color;
+@sale_hat_band_color:           @sale_primary_color;
+@christmas_hat_band_color:      @christmas_primary_color;
+
+// DE Department colours
+@wohnen_hat_band_color:     @wohnen_primary_color;
+@geschenke_hat_band_color:  @geschenke_primary_color;
+@baby-kind_hat_band_color:  @baby-kind_primary_color;
+@damen_hat_band_color:      @damen_primary_color;
+@herren_hat_band_color:     @herren_primary_color;
+
+
+/* -  text
+------------------------------------------------------------------
+*/
+
+@no2_regular_font: "NOTHS Sans No2 Regular", "Helvetica Neue", "HelveticaNeue", Arial, sans-serif;
+
+// page titles (primary and secondary)
+@page_title_font: @no2_regular_font;
+
+// secondary headings e.g. modules headings, elements
+@semibold_font: "NOTHS Sans No2 SemiBold", "Helvetica Neue", "HelveticaNeue", Arial, sans-serif;
+
+@secondary_heading_font:    @semibold_font;
+@module_heading_font:       @semibold_font;
+@partner_link_font:         @no2_regular_font;
+@price_font:                @semibold_font;
+@button_font:               @no2_regular_font;
+@product_listings_product_font: @no2_regular_font;
+
+// body copy
+@body_font:             "NOTHS Sans No3 Regular", "Helvetica Neue", "HelveticaNeue", Arial, sans-serif;
+
+
+@standard_text_color:  #555;                     // used for body text
+@standard_title_color: @standard_primary_color;     // used for headers in general e.g. module headers, price headers
+@product_title_color:  @standard_secondary_color;
+
+//used for page title headers.
+// this may be overriden on a dept basis
+@standard_primary_title_color:   @dark_primary_color;
+@standard_secondary_title_color: #434343;
+@standard_tertiary_title_color:  #434343;
+
+@standard_link_color: @noths_link_color;
+@plain_link_color: @noths_grey_link_color;
+
+// E2TODO: evaluate
+@copy_colour: @standard_text_color;
+@copy_bottom_margin: 18px;
+@copy_leading: 16px;
+@copy_text_size: 13px;
+
+/* -  custom primary title colours
+------------------------------------------------------------------
+*/
+@home_primary_title_color:             @home_primary_color;
+@garden_primary_title_color:           @garden_primary_color;
+@fashion_primary_title_color:          @fashion_primary_color;
+@jewellery_primary_title_color:        @jewellery_primary_color;
+@baby-child_primary_title_color:       @baby-child_primary_color;
+@art_primary_title_color:              @art_primary_color;
+@gifts_primary_title_color:            @gifts_primary_color;
+@weddings_primary_title_color:         @weddings_primary_color;
+@health-beauty_primary_title_color:    @health-beauty_primary_color;
+@food-drink_primary_title_color:       @food-drink_primary_color;
+@pets_primary_title_color:             @pets_primary_color;
+@sale_primary_title_color:             @sale_primary_color;
+@christmas_primary_title_color:        @christmas_primary_color;
+
+// DE Department colours
+@wohnen_primary_title_color:     @wohnen_primary_color;
+@geschenke_primary_title_color:  @geschenke_primary_color;
+@baby-kind_primary_title_color:  @baby-kind_primary_color;
+@damen_primary_title_color:      @damen_primary_color;
+@herren_primary_title_color:     @herren_primary_color;
+
+/* - forms
+------------------------------------------------------------------
+*/
+@field_label_font: @semibold_font;
+@field_border_color: @information_background_color;
+@field_focus_border_color: @standard_secondary_color;
+@field_input_height: 40px;
+
+/* -  errors
+------------------------------------------------------------------
+*/
+@error_color: #cf4858;
+@error_background_color: #fae5e1;
+
+/* -  information
+------------------------------------------------------------------
+*/
+@information_color: #1380b0;
+@information_background_color: #e2f0f5;
+
+/* -  success
+------------------------------------------------------------------
+*/
+@success_color: #0a6877;
+@success_background_color: #b1e1e0;
+
+/* -  alert
+------------------------------------------------------------------
+*/
+@alert_color: #c8872b;
+@alert_background_color: #fef3cf;
+
+/* -  sales
+------------------------------------------------------------------
+*/
+@sales_price_color: #cf4858;
+
+/* -  grids
+------------------------------------------------------------------
+these should not be used directly
+and should only be used via #noths > column mixins in noths/base
+*/
+@standard_outer_container_gutter: 0;
+@standard_column_width: 64px;
+@standard_column_gutter: 16px;
+
+@mobile_outer_container_gutter: 20px;
+@mobile_column_width: 25px;
+@mobile_column_gutter: 10px;
+@mobile_site_container_width: 320px;
+
+@min_desktop_site_width: 960px + @standard_column_gutter + @standard_column_gutter;
+
+/* -  buttons
+------------------------------------------------------------------
+*/
+// Used as the top of the gradient for primary buttons
+@primary_button_top_color: @light_primary_color;
+
+// Used as the bottom of the gradient for primary buttons and as
+// the fallback color for non-gradient-supporting browsers
+@primary_button_bottom_color: @standard_primary_color;
+
+@primary_button_border_color: @dark_primary_color;
+
+// Used as the top of the gradient for secondary buttons
+@secondary_button_top_color: #afafaf;
+
+// Used as the bottom of the gradient for secondary buttons and as
+// the fallback color for non-gradient-supporting browsers
+@secondary_button_bottom_color: #999998;
+
+@secondary_button_border_color: #949494;
+
+// standard border radius for button-shaped links
+@button_border_radius: 5px;
+
+// color for disabled buttons
+@disabled_button_border_color: #ccc;
+
+/* -  tooltips
+------------------------------------------------------------------
+*/
+@standard_tooltip_background_color: @standard_primary_color;
+@standard_tooltip_shadow_color: @dark_primary_color;
+@rich_tooltip_border_color: @tertiary_grey;
+@rich_tooltip_shadow_color: @tertiary_grey;
+
+/* -  MDD
+------------------------------------------------------------------
+*/
+@mdd_title_border_bottom_cover_element_height: 5px;
+
+/* - Checkout
+------------------------------------------------------------------
+*/
+// We have to use a different grid from these forms
+// TODO: Refactor standard_fields_style_set so that this variable is scoped
+// correctly
+@payment_forms_left_column_width: 157px;
+
+/* - Responsive
+------------------------------------------------------------------
+*/
+@tablet: ~"only screen and (min-device-width: 641px) and (max-device-width: 1024px)";

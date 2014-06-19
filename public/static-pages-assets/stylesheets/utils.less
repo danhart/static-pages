@@ -1,0 +1,338 @@
+@import "staple";
+
+/* ==================================================================
+   general-purpose utility mixins
+   ================================================================== */
+#utils {
+    /* -  shadow mixins
+    ------------------------------------------------------------------
+    */
+    .box_shadow(@x, @y, @blur, @colour) {
+        box-shadow: @x @y @blur @colour;
+        -webkit-box-shadow: @x @y @blur @colour;
+    }
+
+    .box_shadow_with_spread(@x, @y, @blur, @spread, @colour) {
+        box-shadow: @x @y @blur @spread @colour;
+        -webkit-box-shadow: @x @y @blur @spread @colour;
+    }
+
+    .no_box_shadow {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+
+    .inner_shadow (@colour, @x, @y, @blur, @spread) {
+        box-shadow: inset @x @y @blur @spread @colour;
+        -webkit-box-shadow: inset @x @y @blur @spread @colour;
+    }
+
+    /* - box sizing mixin
+    ------------------------------------------------------------------
+    */
+    .box_sizing(@sizing) {
+        box-sizing: @sizing;
+        -moz-box-sizing: @sizing;
+    }
+
+    /* - flex model
+    ------------------------------------------------------------------
+    */
+
+    .flexbox {
+
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+    }
+
+    .flex(@flex-grow:0, @flex-shrink: 1, @flex-basis: auto) {
+        -webkit-box-flex: @flex-grow, @flex-shrink, @flex-basis;
+        -moz-box-flex: @flex-grow, @flex-shrink, @flex-basis;
+        -webkit-flex: @flex-grow, @flex-shrink, @flex-basis;
+        -ms-flex: @flex-grow, @flex-shrink, @flex-basis;
+        flex: @flex-grow, @flex-shrink, @flex-basis;
+    }
+
+    .flex-right {
+        -webkit-flex-direction: row;
+        flex-direction: row;
+        -webkit-justify-content: flex-end;
+        justify-content: flex-end;
+    }
+
+    .flex-wrap(@value) {
+        -webkit-flex-wrap: @value;
+        -moz-flex-wrap: @value;
+        -ms-flex-wrap: @value;
+        flex-wrap: @value;
+    }
+
+    .flex-justify-content(@value, @ms-value) {
+        -webkit-justify-content: @value;
+        -moz-justify-content: @value;
+        justify-content: @value;
+        -ms-flex-pack: @ms-value;
+    }
+
+    .flex-direction(@value) {
+        -webkit-flex-direction:@value;
+        -moz-flex-direction:@value;
+        -ms-flex-direction:@value;
+        flex-direction:@value;
+    }
+
+    .flex-order(@value) {
+        -webkit-flex-order:@value;
+        -moz-flex-order:@value;
+        -ms-flex-order:@value;
+        order:@value;
+    }
+
+
+
+
+
+
+    /* -  Transform mixins
+    ------------------------------------------------------------------
+    */
+    .rotate(@degree) {
+        transform: rotate(@degree);
+        -ms-transform: rotate(@degree);
+        -webkit-transform: rotate(@degree);
+    }
+
+    /* -  border mixins
+    ------------------------------------------------------------------
+    */
+    .border_radius(@radius) {
+        border-radius: @radius;
+    }
+
+    .border_bottom_right_radius(@radius) {
+        border-bottom-right-radius: @radius;
+    }
+
+    .border_top_right_radius(@radius) {
+        border-top-right-radius: @radius;
+    }
+
+    .border_bottom_radius(@radius) {
+        border-bottom-left-radius: @radius;
+
+        #utils > .border_bottom_right_radius(@radius);
+    }
+
+    .border_right_radius(@radius) {
+        border-top-right-radius: @radius;
+        border-bottom-right-radius: @radius;
+    }
+
+    .border_left_radius(@radius) {
+        border-bottom-left-radius: @radius;
+        border-top-left-radius: @radius;
+    }
+
+    .border_top_left_radius(@radius) {
+        border-top-left-radius: @radius;
+    }
+
+    .border_top_radius(@radius) {
+        #utils > .border_top_left_radius(@radius);
+        #utils > .border_top_right_radius(@radius);
+    }
+
+    /* -  opacity mixin
+    ------------------------------------------------------------------
+    */
+    .opacity(@opacity) {
+        opacity: @opacity;
+        @ie_opacity: @opacity * 100;
+        -ms-filter: `"progid:DXImageTransform.Microsoft.Alpha(Opacity=@{ie_opacity})"`;
+    }
+
+    .opacity_for_non_ie(@opacity) {
+        opacity: @opacity;
+    }
+
+    .show_hide {
+        .hidden {
+            display: none;
+        }
+        .js .js_show {
+            display: block;
+        }
+        .js .js_hide {
+            display: none;
+        }
+        .nojs .no_js_hide {
+            display: none;
+        }
+        .js .hidden_but_present {
+            display: block;
+            visibility: hidden;
+            position: absolute;
+            top: -99999px;
+        }
+        .mobile_hide {
+            @media @mobile {
+                display: none;
+            }
+        }
+        .mobile_only {
+            display: none;
+
+            @media @mobile {
+                display: block;
+            }
+        }
+    }
+
+    /* -  Not selectable mixin
+    ------------------------------------------------------------------
+       The text of the element and sub-elements will appear as
+       if they cannot be selected.
+    */
+    .not_selectable {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: -moz-none;
+        ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
+
+    /* -  Hide Text mixin
+    ------------------------------------------------------------------
+        A modern, performant image replacement mixin.
+    */
+    .hide_text {
+        text-indent: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    /* -  Linear gradient mixin
+    ------------------------------------------------------------------
+    */
+    #linear_gradient {
+        .vertical(@start_colour, @end_colour) {
+            #utils > #linear_gradient > ._old_browsers(@end_colour);
+            background-image: -ms-linear-gradient(top, @start_colour 0%, @end_colour 100%); /* IE10 */
+            background-image: -webkit-gradient(linear, left top, left bottom, from(@start_colour), to(@end_colour)); // Webkit (Safari/Chrome 10)
+            background-image: -webkit-linear-gradient(@start_colour, @end_colour); // Webkit (Chrome 11+)
+            background-image: -moz-linear-gradient(@start_colour, @end_colour); // Firefox
+            background-image: -o-linear-gradient(top,  @start_colour,  @end_colour); // Opera
+            background-image: -khtml-gradient(linear, left top, left bottom, from(@start_colour), to(@end_colour)); // Konqueror
+            background-image: linear-gradient(top, @start_colour 0%, @end_colour 100%); /* W3C */
+
+            filter: e(%("progid:DXImageTransform.Microsoft.Gradient(StartColorStr='%d', EndColorStr='%d', GradientType=0)", @start_colour, @end_colour));
+            -ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorStr='%d', EndColorStr='%d', GradientType=0))", @start_colour, @end_colour);
+        }
+
+        .horizontal(@start_colour, @end_colour) {
+            #utils > #linear_gradient > ._old_browsers(@end_colour);
+            background-image: -ms-linear-gradient(left, @start_colour 0%, @end_colour 100%); /* IE10 */
+            background-image: -webkit-gradient(linear, left top, right top, from(@start_colour), to(@end_colour)); // Webkit (Safari/Chrome 10)
+            background-image: -webkit-linear-gradient(right center, @start_colour, @end_colour); // Webkit (Chrome 11+)
+            background-image: -moz-linear-gradient(right center, @start_colour, @end_colour); // Firefox
+            background-image: -o-linear-gradient(left,  @start_colour,  @end_colour); // Opera
+            background-image: -khtml-gradient(linear, left top, right top, from(@start_colour), to(@end_colour)); // Konqueror
+            background-image: linear-gradient(right center, @start_colour 0%, @end_colour 100%); // W3C
+
+            filter: e(%("progid:DXImageTransform.Microsoft.Gradient(StartColorStr='%d', EndColorStr='%d', GradientType=1)", @start_colour, @end_colour));
+            -ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorStr='%d', EndColorStr='%d', GradientType=1))", @start_colour, @end_colour);
+        }
+
+        .vertical_three_colours(@start_colour, @mid_colour, @colour_stop, @end_colour) {
+            #utils > #linear_gradient > ._old_browsers(@end_colour);
+            background-image: -ms-linear-gradient(top, @start_colour 0%, @mid_colour @colour_stop * 100%, @end_colour 100%); // IE10
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start_colour), color-stop(@colour_stop, @mid_colour), to(@end_colour)); // Webkit (Safari/Chrome 10)
+            background-image: -webkit-linear-gradient(@start_colour, color-stop(@colour_stop, @mid_colour), @end_colour); // Webkit (Chrome 11+)
+            background-image: -moz-linear-gradient(@start_colour, color-stop(@mid_colour, @colour_stop), @end_colour); // Firefox
+
+            // Fallback to two colours for other browsers
+            background-image: -o-linear-gradient(top,  @start_colour,  @end_colour); // Opera
+            background-image: -khtml-gradient(linear, left top, left bottom, from(@start_colour), to(@end_colour)); // Konqueror
+
+            // IE6-9
+            filter: e(%("progid:DXImageTransform.Microsoft.Gradient(StartColorStr='%d', EndColorStr='%d', GradientType=0)", @start_colour, @end_colour));
+            -ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorStr='%d', EndColorStr='%d', GradientType=0))", @start_colour, @end_colour);
+
+            // W3C with three colours
+            background-image: linear-gradient(to bottom, @start_colour 0%, @mid_colour @colour_stop * 100%, @end_colour 100%); // W3C
+        }
+
+        ._old_browsers(@end_colour) {
+            background-color: @end_colour;
+            background-repeat: no-repeat;
+        }
+    }
+
+    /* - CSS shape generation mixins
+    ------------------------------------------------------------------
+    */
+    #shapes {
+
+        /* - Triangle shape mixin
+        ------------------------------------------------------------------
+           Draw an isosceles right-angled triangle with fill color @color,
+           an altitude of @size and the right-angle tip facing @orientation
+        */
+        .triangle_shape(@orientation, @color, @size) {
+            // common to all triangles
+            content: " ";
+            height: 0;
+            width: 0;
+            border: @size solid transparent;
+
+            .triangle_fill_color(@orientation, @color);
+        }
+        .triangle_fill_color(left,  @color) { border-right-color:  @color; }
+        .triangle_fill_color(right, @color) { border-left-color:   @color; }
+        .triangle_fill_color(up,    @color) { border-bottom-color: @color; }
+        .triangle_fill_color(down,  @color) { border-top-color:    @color; }
+
+        // show a triangular arrow as a pseudo-element centered within this box
+        // it has to be positioned (not static)
+        .centered_triangle(@orientation; @color; @size) {
+            &:after {
+                #utils > #shapes > .triangle_shape(@orientation, @color, @size);
+
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -@size;
+                margin-left: -@size;
+
+                .shift_to_center(@orientation);
+                .shift_to_center(left)  { margin-left: -1.5 * @size; }
+                .shift_to_center(right) { margin-left: -0.5 * @size; }
+                .shift_to_center(up)    { margin-top:  -1.5 * @size; }
+                .shift_to_center(down)  { margin-top:  -0.5 * @size; }
+            }
+        }
+        .centered_triangle_fill_color(@orientation, @color) {
+            &:after {
+                #utils > #shapes > .triangle_fill_color(@orientation, @color);
+            }
+        }
+    }
+
+    // A simple modern clearfix
+    // Based on the one found here: http://nicolasgallagher.com/micro-clearfix-hack/
+    .clearfix {
+        *zoom: 1;
+
+        &:after {
+            content: " ";
+            display: block;
+            clear: both;
+        }
+    }
+}
+

@@ -1,0 +1,392 @@
+@import (reference) "global_style_set";
+@import (reference) "button_style_set";
+@import (reference) "standard_fields_style_set";
+
+@standard_text_input_height: 37px;
+@mobile_text_input_height: 45px;
+@label_font_size: 14px;
+
+/* ==================================================================
+   grids
+   ================================================================== */
+.standard_fields.inputs {
+    width: 100%;
+
+    @media @mobile {
+        #noths > .add_bottom_gutter;
+    }
+}
+
+.text .inputs {
+    width: 100%;
+}
+
+.stringish input,
+textarea,
+select {
+    width: 100%;
+}
+
+.field {
+    width: 100%;
+    #noths > .full_width_for_mobile;
+    float: left;
+    clear: both;
+}
+
+.actions {
+    clear: both;
+    text-align: right;
+
+    @media @mobile {
+        #noths > .add_top_gutter;
+    }
+
+    .primary, .icon_input, .primary_button {
+        #noths > .full_width_for_mobile;
+    }
+    .primary {
+        @media @mobile {
+            #noths > .add_bottom_gutter;
+        }
+    }
+    .button, .icon_input {
+        @media @mobile {
+            float: none;
+            display: block;
+
+            &.mobile_hide {
+                display: none;
+            }
+        }
+    }
+    .secondary {
+        @media @mobile {
+            text-align: center;
+            display: block;
+            float: none;
+            #noths > .add_bottom_gutter;
+        }
+    }
+
+    .secondary.text_link, .text_link {
+        font-size: 12px;
+        float: left;
+        #noths > .add_top_gutter;
+        #links_style > .blue_with_underline_hover_effect;
+    }
+}
+.actions + .standard_fields {
+    #noths > .add_top_gutter;
+}
+
+.site_layout {
+    .actions {
+        text-align: left;
+    }
+}
+
+.centered_layout {
+    .actions {
+        text-align: right;
+    }
+}
+
+.forgotten_password_layout, .unsubscribe_layout {
+    .actions {
+        text-align: right;
+    }
+}
+
+.has_top_actions {
+    .main {
+        padding-top: 67px;
+        position: relative;
+    }
+    .side {
+        #noths > .add_top_gutter;
+    }
+
+    .page_title {
+        margin-bottom: 0;
+    }
+}
+
+.field input[type=file]{
+    margin-top: 8px;
+}
+
+.address_line { display: block; }
+
+/* ==================================================================
+   standard fields
+   ================================================================== */
+
+.standard_fields {
+    #standard_fields_style > .base;
+    #standard_fields_style > .grid;
+
+    @media @mobile {
+        #standard_fields_style > .remove_grid;
+    }
+}
+
+.standard_fields_without_grid {
+    #standard_fields_style > .base;
+}
+
+.standard_fields_grid {
+    #standard_fields_style > .grid;
+}
+
+/* ==================================================================
+   miscellaneous
+   ================================================================== */
+
+.deemphasised {
+    font-size: 12px;
+    color: #999;
+
+    .information {
+        color: @grey_darker;
+    }
+
+    .label {
+        font-size: 12px;
+        line-height: 1.3;
+        color: #999;
+    }
+}
+
+/* ==================================================================
+   overrides
+   ================================================================== */
+
+#IE7 {
+    /* -  used to fix legends auto clearing in IE7
+   ------------------------------------------------------------------
+        usage:
+
+        .lt-ie8 {
+            .the_fields {
+                #IE7 > #legend_label_fix > .base;
+            }
+        }
+   */
+    #legend_label_fix {
+        .base {
+            // ol.inputs is deprecated, use .nested_field_group instead
+            ol.inputs, .nested_field_group {
+                #standard_fields_style > .grid > .push_left;
+            }
+
+            legend.label {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+    }
+}
+
+/* -  name fields
+   ------------------------------------------------------------------
+   [title] [firstname] [surname]
+ */
+.user_title_name_fields {
+    .title_field {
+        width: 22%;
+        #noths > .pad_right_with_gutter;
+        #noths > .full_width_for_mobile;
+
+        @media @mobile {
+            padding: 0;
+        }
+    }
+
+    .firstname_field {
+        width: 39%;
+        #noths > .pad_right_with_gutter;
+        #noths > .full_width_for_mobile;
+
+        @media @mobile {
+            padding: 0;
+        }
+    }
+
+    .surname_field {
+        width: 39%;
+        #noths > .full_width_for_mobile;
+    }
+}
+
+.user_phone_fields {
+    .telephone_alpha2_field {
+        width: 50%;
+        #noths > .pad_right_with_gutter;
+        #noths > .full_width_for_mobile;
+
+        @media @mobile {
+            padding: 0;
+        }
+    }
+
+    .telephone_field {
+        width: 50%;
+        #noths > .full_width_for_mobile;
+
+        @media @mobile {
+            padding: 0;
+        }
+    }
+}
+
+.lt-ie8 {
+    .user_title_name_fields {
+        #IE7 > #legend_label_fix > .base;
+    }
+}
+
+/* -  date fields
+   ------------------------------------------------------------------
+   e.g. for credit card expiry dates
+ */
+.date_inputs_group {
+    li.field {
+        span.inputs { width: 100%; }
+    }
+    .month_field {
+        clear: left;
+        width: 50%;
+        #noths > .pad_right_with_gutter(0.5);
+    }
+
+    .year_field {
+        width: 50%;
+        #noths > .pad_left_with_gutter(0.5);
+    }
+
+    .month_field, .year_field {
+        margin-bottom: 0;
+    }
+}
+
+.user_title_name_fields, .user_phone_fields {
+    @media @mobile {
+        fieldset > .label { display: none; }
+
+        &.field {
+            margin-bottom: 0;
+        }
+    }
+    label.label {
+        display: none;
+        @media @mobile {
+            display: inline;
+        }
+    }
+    .field {
+        margin-bottom: 0;
+
+        @media @mobile {
+            #noths > .add_bottom_gutter;
+        }
+
+        .inline-errors {
+            width: 100%;
+        }
+    }
+
+    // ol.inputs is deprecated use .nested_field_group instead.
+    // TODO: Make this a reusable part of standard_fields
+    ol.inputs, .nested_field_group {
+        #noths > .full_width_for_mobile;
+    }
+
+    // TODO: Make this a reusable part of standard_fields
+    span.inputs {
+        width: 100%;
+    }
+
+    legend.label {
+        @media @mobile {
+            display: none;
+        }
+    }
+}
+
+.field .issue_number {
+    #noths > .column_with_final_gutter(1);
+    #noths > .mobile_module_column_with_final_gutter(4);
+}
+
+/* -  card_verification_code
+   ------------------------------------------------------------------
+ */
+.field.card_security_code input {
+    #noths > .column_with_final_gutter(1);
+    #noths > .mobile_module_column_with_final_gutter(4);
+
+    @media @mobile {
+        clear: left;
+    }
+}
+
+/* -  post code
+   ------------------------------------------------------------------
+ */
+.post_code_field {
+    input {
+       #noths > .column(1);
+       #noths > .mobile_column(3);
+    }
+
+    .find_address_button {
+        #standard_fields_style > #inline_button > .button;
+        float: left;
+        #noths > .add_left_gutter;
+
+        @media @mobile {
+            float: right;
+        }
+    }
+
+    .ajax_loader {
+        #ajax_loader_style > .base;
+
+        @media @mobile {
+            float: none;
+            display: block;
+            margin: 60px auto 0;
+        }
+    }
+}
+
+/* -  country
+   ------------------------------------------------------------------
+ */
+input.country {
+   #noths > .column(6);
+   #noths > .full_width_for_mobile;
+}
+
+.field.recaptcha_field {
+    #standard_fields_style > .grid > .push_left;
+    .recaptchatable * {
+        color: #0ca6d4;
+    }
+    table { width: 100%; }
+}
+
+.field.notification_present {
+    &.info {
+        input { border: 1px solid @information_color; }
+
+        .field_notification_message {
+            display: block;
+            clear: both;
+            color: @information_color;
+            background-color: @information_background_color;
+        }
+    }
+}
