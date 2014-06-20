@@ -2,8 +2,10 @@ var express = require('express');
 var router = express.Router();
 var layoutService = require('../services/layout-service');
 var productService = require('../services/product-service');
+var cartService = require('../services/cart-service');
 var PageBuilder = require('page-builder');
 var productsHelper = require('../view-helpers/products-helper.js');
+var appConfig = require('../app-config');
 
 // renderProductPage could live in a new layer, but not sure what layer yet!
 var renderProductPage = function(res, locals, next) {
@@ -33,8 +35,15 @@ router.route('/:partner_shortcode/:product_handle').
         });
     }).
     put(function(req, res, next) {
-        console.log(req.body);
-        res.send('done');
+        cartService.get(req.cookies[appConfig.cartCookie], next, function(cart) {
+            var cartItemsLink = cart.links.filter(function(link) {
+                return link.rel.indexOf('cart-items') > -1;
+            })[0].href;
+
+            console.log(cartItemsLink);
+
+            res.send(JSON.stringify(cart));
+        });
     });
 
 module.exports = router;

@@ -43,13 +43,13 @@ div#content.full_page_layout
                 li.field.product_option_field.stringish
                   span.inputs
                     if option.type === 'selection'
-                      select.select_option.select.product_select_box.required(name='option[#{option.id}]')
+                      select.select_option.select.product_select_box.required(name='option[id_#{option.id}]')
                         option(value='')= option.name
                         each value in option.values
                           option(value=value.id)= value.name
                     if option.type === 'personalisation'
                       label.label= option.name
-                      input.customer_defined_option.input.required(name='option[#{option.id}]', type='text')
+                      input.customer_defined_option.input.required(name='option[id_#{option.id}]', type='text')
           div.product_buttons
             div.qty
               label(for='qty') quantity
