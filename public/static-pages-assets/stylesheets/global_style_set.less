@@ -1,0 +1,1149 @@
+@import "base";
+
+
+#font_style {
+    .title {
+        font-family: @page_title_font;
+        font-style: normal;
+    }
+
+    .primary_title {
+        #font_style > .title;
+        font-size: 42px;
+        line-height: 40px;
+    }
+
+    .smaller_primary_title {
+        #font_style > .title;
+        font-size: 36px;
+        line-height: 34px;
+        text-transform: uppercase;
+    }
+
+    .secondary_title {
+        #font_style > .title;
+        font-size: 22px;
+        color: @standard_secondary_title_color;
+    }
+
+    .tertiary_title {
+        #font_style > .title;
+        color: @standard_tertiary_title_color;
+        font-size: 17px;
+    }
+
+    .module_title {
+        font-family: @module_heading_font;
+        font-style: normal;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: @standard_secondary_title_color;
+    }
+
+    .secondary {
+        font-family: @semibold_font;
+        font-style: normal;
+    }
+
+    .standard {
+        font-family: @body_font;
+        font-style: normal;
+    }
+
+    .body {
+        font-family: @body_font;
+        font-style: normal;
+    }
+
+    .mobile_primary_title {
+        #font_style > .title;
+        font-size: 26px;
+        line-height: normal;
+    }
+
+    .mobile_secondary_title {
+        #font_style > .title;
+        color: @standard_secondary_title_color;
+        font-size: 20px;
+
+        // E2TODO: This line-height should probably be applied to desktop
+        // secondary_titles as well. I have not made this change so that I can
+        // control the scope for E2.
+        line-height: 1.1;
+    }
+
+    .mobile_tertiary_title {
+        #font_style > .tertiary_title;
+
+        // E2TODO: This line-height should probably be applied to desktop
+        // tertiary_titles as well. I have not made this change so that I can
+        // control the scope for E2.
+        line-height: 1.1;
+    }
+}
+
+#site_style {
+    .primary_title {
+        #font_style > .primary_title;
+        #noths > .add_bottom_gutter;
+        color: @standard_primary_title_color;
+        text-transform: uppercase;
+
+        @media @mobile {
+            #font_style > .mobile_primary_title;
+        }
+    }
+
+    .secondary_title {
+        #font_style > .secondary_title;
+        clear: both;
+        width: 100%;
+        float: left;
+        #noths > .add_bottom_gutter;
+
+        @media @mobile {
+            #site_style > .mobile_secondary_title;
+        }
+    }
+
+    .tertiary_title {
+        #font_style > .tertiary_title;
+        #noths > .add_bottom_gutter;
+    }
+
+    .module_title {
+        #font_style > .module_title;
+    }
+
+    .mobile_secondary_title {
+        #font_style > .mobile_secondary_title;
+        #noths > .add_bottom_gutter;
+    }
+
+    .mobile_tertiary_title {
+        #site_style > .tertiary_title;
+    }
+}
+
+/*  -  Notification style
+    ------------------------------------------------------------------
+    These are used to style the big notification blocks e.g. notices, errors
+
+    Used:
+    - checkout, cart
+ */
+#notifications_style {
+    ._message_type(@text_color, @background) {
+        background-color: @background;
+        color: @text_color;
+    }
+
+    ._message {
+        #noths > .border_radius(4px);
+        #noths > .pad_with_gutter;
+        #noths > .add_bottom_gutter;
+        font-size: @copy_text_size;
+        line-height: normal;
+
+        a {
+            color: @standard_link_color;
+            #links_style > .underline_hover_effect;
+        }
+
+        p {
+            overflow: hidden;
+            word-wrap: break-word;
+        }
+    }
+
+    .error_message {
+        #notifications_style > ._message;
+        #notifications_style > ._message_type(
+            @error_color,
+            @error_background_color
+        );
+    }
+
+    .info_message {
+        #notifications_style > ._message;
+        #notifications_style > ._message_type(
+            @information_color,
+            @information_background_color
+        );
+    }
+
+    .alert_message {
+        #notifications_style > ._message;
+        #notifications_style > ._message_type(
+            @alert_color,
+            @alert_background_color
+        );
+    }
+
+    .success_message {
+        #notifications_style > ._message;
+        #notifications_style > ._message_type(
+            @success_color,
+            @success_background_color
+        );
+    }
+
+    .icon {
+        #noths > .pad_left_with_gutter(4);
+        position: relative;
+
+        // This is the gutter + the height of the icon
+        min-height: 64px;
+
+        .icon {
+            position: absolute;
+            left: 16px;
+            top: 16px;
+            text-indent: -9999px;
+        }
+    }
+}
+
+/*  -  Error styles
+    ------------------------------------------------------------------
+    A set of mixins to deal with error styling
+
+    Used:
+    - everywhere
+ */
+#error_style {
+    .base {
+        color: @error_color;
+        background: @error_background_color;
+        font-size: 13px;
+    }
+
+    .error_label {
+        color: @error_color;
+    }
+}
+
+/*  -  Standard Field styles
+    ------------------------------------------------------------------
+    A set of mixins to deal with global form styling for common form
+    fields e.g. text inputs
+
+    This is extended/overriden by the richer standard_fields_style_set
+    which adds more opinionated styling for forms and form layouts e.g.
+    as seen in the checkout
+
+    Used:
+    - everywhere
+ */
+#standard_fields_style {
+    .text_area {
+        #standard_fields_style > .text_input;
+        padding: 10px;
+        height: 200px;
+        line-height: 1.2;
+    }
+    .text_input {
+        #standard_fields_style > .stringish_form_element;
+        #noths > .border_radius(3px);
+        #standard_fields_style > .text_input > ._text_input_shadow;
+        padding: 0 10px;
+
+        // This stops Mobile Safari from adding its own inner box-shadow
+        -webkit-appearance: none;
+
+        &:focus {
+            #noths > .no_box_shadow;
+        }
+
+        &.invalid {
+            #standard_fields_style > .text_input > ._text_input_shadow;
+        }
+
+        &.has_placeholder {
+            color: #aaa; // default webkit color of placeholder text
+        }
+
+        ._text_input_shadow {
+            #noths > .inner_shadow(rgba(0,0,0,0.24), 0, 2px, 6px, 0);
+        }
+    }
+
+    .select_input {
+        #standard_fields_style > .stringish_form_element;
+        border-color: #ccc;
+        vertical-align: middle;
+        padding:9px; /* fix for Firefox lack of vertical alignment */
+    }
+
+    .checkbox {
+        &.invalid {
+            box-shadow: 0px 0px 0px 1px @error_color;
+            border-radius: 3px;
+        }
+    }
+
+    // stringish means: select, input[type=text], textarea
+    .stringish_form_element {
+        @stringish_element_height: @field_input_height;
+        border: 1px solid @field_border_color;
+        font-size: 14px;
+        color: #555;
+        // We use line-height rather than padding to set the position of the
+        // text, otherwise IE (all versions) misbehaves.
+        height: @stringish_element_height;
+        line-height: @stringish_element_height;
+
+        &:focus {
+            border: 1px solid @field_focus_border_color;
+        }
+
+        &.invalid {
+            border: 1px solid @error_color;
+        }
+    }
+
+    #inline_button {
+        // We push the button down by 1px when it's used next to a regular-sized
+        // text input element; otherwise the alignment appears to be wrong.
+        .button {
+            margin-top: 1px;
+        }
+    }
+}
+
+/*  -  Link styles
+    ------------------------------------------------------------------
+    A set of mixins to deal with links
+
+    Used:
+    - everywhere
+ */
+#links_style {
+    .no_hover_effect {
+        &:hover{
+            border-bottom: 0;
+        }
+    }
+
+    .underline_hover_effect {
+        cursor: pointer;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+
+    .blue_with_underline_hover_effect {
+        color: @noths_link_color;
+        #links_style > .underline_hover_effect;
+    }
+
+    .blue_without_hover_effect {
+        cursor: pointer;
+        color: @noths_link_color;
+    }
+
+    .blue_hover_effect {
+        cursor: pointer;
+        &:hover {
+            color: @standard_link_color;
+            border-color: @standard_link_color;
+        }
+    }
+
+    .toggle_link_effect {
+        background: url(/images/checkout/backgrounds/closed_open_arrows_sprite.png) 1px 3px no-repeat;
+        padding-left: 10px;
+        cursor: pointer;
+        #links_style > .underline_hover_effect;
+
+        &.open {
+            background-position: 0 -11px;
+        }
+    }
+
+    .blue_hover {
+        a:hover {
+            color: @noths_link_color;
+        }
+    }
+}
+
+/*  -  Content style
+    ------------------------------------------------------------------
+    A set of mixins to deal with content styles
+
+    Used:
+    - directly on the .copy class
+    - within the #simple_content_style_set
+    - standard fields
+    - order completed
+
+ */
+#content_style {
+    .normal {
+        #content_style > #text_style > .normal;
+        #content_style > #list_style > .normal;
+        #content_style > #link_style > .normal;
+    }
+
+    #text_style {
+        .normal {
+            font-size: @copy_text_size;
+            line-height: @copy_leading;
+            color: @copy_colour;
+        }
+    }
+
+    #link_style {
+        .normal {
+            a {
+                #links_style > .blue_with_underline_hover_effect;
+            }
+        }
+    }
+
+    #list_style {
+        .base {
+            ol, ul {
+                #content_style > #list_style > .list;
+            }
+
+            ol {
+                list-style-type: decimal;
+            }
+
+            ul {
+                #content_style > #list_style > .unordered_list;
+            }
+        }
+
+        .list {
+            clear: both;
+            padding-left: 2em;
+        }
+
+        .unordered_list {
+            list-style-type: disc;
+        }
+
+        .indent_by_gutter_width {
+            #noths > .pad_left_with_gutter;
+        }
+
+        .normal {
+            #content_style > #list_style > .base;
+
+            li {
+                margin-bottom: @copy_bottom_margin / 2;
+            }
+        }
+
+        .deep {
+            #content_style > #list_style > .base;
+
+            li {
+                margin-bottom: @copy_bottom_margin;
+            }
+        }
+
+        .condensed {
+            #content_style > #list_style > .base;
+        }
+    }
+
+    .blockquotes {
+        blockquote {
+            #noths > .add_bottom_gutter;
+        }
+
+        .author {
+            float: right;
+            font-family: @semibold_font;
+        }
+    }
+}
+
+/*  -  Drawn border
+    ------------------------------------------------------------------
+    Deals with rendering the hand-drawn squiggly border on modules
+
+    Used:
+    - footer (mobile only)
+ */
+#drawn_border_style {
+    .base {
+        background: url(/images/shared/backgrounds/mobile_drawn_line_divider.svg) center bottom no-repeat;
+        background-size: 100% 4px;
+        border-bottom: 0;
+    }
+}
+
+/*  -  Loader
+    ------------------------------------------------------------------
+    Adds a loader gif to a module e.g. for AJAX events
+
+    Used:
+    - Postcode lookup
+ */
+#ajax_loader_style {
+    .base {
+        float: left;
+        #noths > .add_left_gutter;
+        background: url(/images/checkout/backgrounds/noths_spinner.gif) no-repeat;
+        width: 37px;
+        height: 37px;
+        text-indent: -9999px;
+
+        @media @mobile {
+            background: url(/images/checkout/backgrounds/noths_spinner_mobile.gif) no-repeat;
+            background-size: 45px 45px;
+            width: 45px;
+            height: 45px;
+        }
+    }
+}
+
+/*  -  Custom Select Box
+------------------------------------------------------------------
+    Provides the styling for the custom select box UI elements. This is
+    supported by the jQuery selectBox plugin.
+
+    Used:
+    - Geo selection module on desktop (the modal)
+ */
+@select_box_arrow_width: 21px;
+#custom_select_box_style {
+    .select_box_container {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        // No elements should be visually selectable
+        #utils > .not_selectable;
+    }
+
+    .select_box {
+        min-width: 150px;
+        position: relative;
+        border: solid 1px #88847f;
+        line-height: 27px;
+        text-decoration: none;
+        text-align: left;
+        color: #555;
+        outline: none;
+        vertical-align: middle;
+        background: #f9f9f9;
+        #noths > #linear_gradient > .vertical(#fbfbfb, #f4f4f4);
+        #noths > .two_box_shadows(inset 0 -1px 0 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.15));
+        #noths > .border_radius(3px 3px 0 0);
+        display: block;
+        cursor: default;
+        font-size: 13px;
+        padding-right: @select_box_arrow_width;
+
+        &:hover {
+            color: #555;
+        }
+
+        &.invalid {
+            border-color: #C46D70;
+        }
+
+        @media @mobile {
+            line-height: 32px;
+            font-size: 17px;
+        }
+    }
+
+    .select_box_label {
+        padding: 2px 8px;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        // SelectBoxIt sets an incorrect max-width value in Firefox, and we do
+        // not need this property to be set anyway for any browser.
+        max-width: none !important;
+    }
+
+    .select_box_arrow {
+        position: absolute;
+        top: 1px;
+        right: 0;
+        width: @select_box_arrow_width;
+        bottom: 0;
+        background: rgb(229, 229, 229) url("/images/shared/icons/arrow_combo_box.png") no-repeat 50% center;
+
+        // For browsers that support rgba we use black with a low alpha value.
+        // For browsers that do not support rgba the declaration is ignored.
+        background: rgba(0, 0, 0, 0.08) url("/images/shared/icons/arrow_combo_box.png") no-repeat 50% center;
+        border-left: solid 1px #bababa;
+        #noths > .inner_box_shadow(rgba(255, 255, 255, 0.4), 1px, 0, 0, 0);
+    }
+
+    .options_list {
+        position: absolute;
+        z-index: 1101;
+        max-height: 200px;
+        min-height: 1em;
+        border: solid 1px #BBB;
+        background: #FFF;
+        #noths > .box_shadow(0, 2px, 6px, rgba(0, 0, 0, .2));
+        overflow: auto;
+        font-size: 13px;
+        display: none;
+        left: 0;
+        right: 0;
+    }
+
+    ._option_link {
+        display: block;
+        line-height: 29px;
+        padding: 0 .5em;
+        white-space: nowrap;
+        overflow: hidden;
+        background-color: #EFEDEA;
+        border-bottom: 1px solid #CDCBC9;
+        border-top: 1px solid #F5F4F2;
+        color: #555;
+    }
+
+    .option {
+        display: block;
+    }
+
+    .option_anchor {
+        #custom_select_box_style > ._option_link;
+    }
+
+    .option_anchor_hover {
+        background-color: #FBFBFB;
+        cursor: pointer;
+    }
+
+    .option_anchor_disabled {
+        color: #888;
+        background-color: transparent;
+    }
+
+    .option_group {
+        #custom_select_box_style > ._option_link;
+
+        color: #666;
+        background: #E5E1DB;
+        border-top: 0;
+    }
+
+    #disabled {
+        .select_box_arrow {
+            #noths > .opacity(0.5);
+            border-color: #666;
+        }
+
+        .select_box {
+            color: #888;
+        }
+    }
+}
+
+/* -  skewy style set
+   ------------------------------------------------------------------
+   produces the skewed layer effect
+
+   .base should be applied to the module along with an accompanying
+   color mixin e.g. .color or .standard_*_color
+
+   used by:
+   - .checkout_summary_module
+   - sidebar links module (department page)
+
+   notes:
+   #relative_layout > .base should be applied to the
+   module container (within grid.less)
+
+   PE for modern browsers, fallback to standard border for legacy browsers
+ */
+#skewy_style {
+    .color(@border_color, @skewed_layer_color){
+        border: 1px solid @border_color;
+
+        &:before {
+            background: @skewed_layer_color;
+        }
+    }
+
+    .base {
+        position: relative;
+        z-index: auto;
+        padding: 23px;
+
+        &:before {
+            content: "";
+            position: absolute;
+            left: -2px;
+            top: -1px;
+            right: 8px;
+            bottom: -1px;
+            z-index: -1;
+            background: @secondary_grey;
+            display: none\0; // hack to disable skewy bg for IE8 due to its broken z-index stacking order with pseudo elements.
+        }
+
+        #skewy_style > .rotate;
+    }
+
+    .standard_shadow_color {
+        #skewy_style > .color(@primary_grey, @secondary_grey);
+    }
+
+    .standard_department_color(@color: @standard_secondary_dept_color) {
+        #skewy_style > .color(#d6d2ce, @color);
+    }
+
+    .bordered_shadow {
+        #skewy_style > .color(@tertiary_grey, @primary_grey);
+
+        &:before {
+            border: 1px solid @secondary_grey;
+        }
+    }
+
+    .rotate(@degree: 3.3deg) {
+        &:before{
+            #noths > .rotate(@degree);
+        }
+    }
+}
+
+/* -  sidebar_summary style set
+   ------------------------------------------------------------------
+   used by .checkout_summary_module
+ */
+#sidebar_summary_style {
+    .base {
+        // E2TODO: this needs to be updated as per design
+        font-size: 14px;
+        background: @standard_box_module_background_color;
+        position: relative;
+        #noths > .pad_with_gutter;
+        width: 100%;
+        #skewy_style > .base;
+        #skewy_style > .standard_shadow_color;
+        #skewy_style > .rotate(1.6deg);
+    }
+
+    .primary_heading {
+        #font_style > .secondary_title;
+        #noths > .add_bottom_gutter;
+    }
+
+    .secondary_heading {
+        #font_style > .secondary_title;
+        font-size: 20px;
+        border: 1px solid @standard_box_module_border_color;
+        background-color: #fff;
+
+        #noths > .pad_sides_with_gutter;
+        #noths > .pad_top_with_gutter(0.5);
+        #noths > .pad_bottom_with_gutter(0.5);
+        #noths > .add_bottom_gutter;
+
+        .tick {
+            vertical-align: middle;
+        }
+    }
+}
+
+#container_shadow_style {
+    .base {
+        position: relative;
+        #noths > .add_bottom_gutter;
+
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: -16px;
+            background-image: url("/images/checkout/backgrounds/container_shadow.png");
+            background-repeat: no-repeat;
+            border-top: 1px solid #dfdfdd;
+            background-position: right;
+            height: 15px;
+            width: 100%;
+            right: 0;
+        }
+    }
+}
+
+/* -  shadowed_box_module_style style set
+   ------------------------------------------------------------------
+    provides an offset bottom right layer shadow
+
+   used by .order_details_module
+ */
+#shadowed_box_module_style {
+    .base {
+        background: @standard_box_module_background_color;
+        #noths > .solid_drop_shadow;
+    }
+
+    .dark_color {
+        background: @secondary_grey;
+    }
+
+    .section_heading {
+        font-size: 18px;
+
+        line-height: 20px;
+    }
+
+    .sub_section {
+        position: relative;
+        margin-bottom: 0;
+        clear: both;
+
+        &.hidden_but_present {
+          position: absolute;
+        }
+
+        textarea {
+          background-color: #fff;
+          height: 80px;
+          resize: vertical;
+        }
+
+        .field {
+          float: left;
+          display: inline;
+          clear: both;
+          position: relative;
+        }
+
+        .label {
+          text-align: left;
+          line-height: 1.1;
+        }
+    }
+
+    .sub_section_heading {
+
+    }
+}
+
+/*  -  Table styles
+    ------------------------------------------------------------------
+    A set of mixins to deal with tables
+
+    Used:
+    - Currently only used in tables on the content pages, but could be used on
+      the cart page as well.
+ */
+#table_style {
+    .linearise {
+        display: block;
+
+        td {
+            border: 0;
+        }
+
+        td, tr, tbody {
+            display: block;
+        }
+
+        thead, tfoot {
+            display: none;
+        }
+    }
+}
+
+#price_format {
+    .base {
+        .price_unit,
+        .big_price,
+        .decimal {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .big_price {
+            font-size: 1.5em;
+            line-height: 1.05;
+        }
+
+        .price_unit, .decimal {
+            padding-top: 0.1em;
+        }
+
+        .decimal {
+            padding-left: 2px;
+        }
+
+        .price_unit {
+            padding-right: 1px;
+        }
+    }
+}
+
+/* -  View all style
+   ------------------------------------------------------------------
+   Can be used standard-alone by applying:
+       #view_all_style > .view_all_link;
+
+   Can also be used with various title styles.
+
+   This implemented will only work with single-line titles and will need to be
+   updated for multi-line at some point.
+
+   Used:
+    - Partner storefront page
+    - Department pages
+ */
+#view_all_style {
+    .view_all_link {
+        color: @standard_link_color;
+        font-size: 14px;
+        padding: 11px 0 1px 17px;
+        background: url("/images/shared/backgrounds/view_all_divider@2x.png") 5px 2px no-repeat;
+        background-size: 10px 26px;
+        #links_style > .underline_hover_effect;
+
+        span { display: none; }
+
+        @media @mobile {
+            padding-top: 2px;
+        }
+    }
+
+    .secondary_title {
+        #view_all_style > ._title;
+
+        .view_all_link {
+            margin-top: 4px;
+        }
+    }
+
+    .lt-ie9 {
+        .view_all_link {
+            background-image: url("/images/shared/backgrounds/view_all_divider.png");
+        }
+    }
+
+    ._title {
+        overflow: hidden;
+
+        .view_all_link {
+            #view_all_style > .view_all_link;
+            float: left;
+        }
+
+        .title {
+            float: left;
+            width: auto;
+        }
+    }
+}
+
+// Currently only implemented for mobile
+#simple_table_style {
+    // Base provides a mapping for #simple_content_style > .base
+    .base {
+        @media @mobile {
+            #table_style > .linearise;
+            #simple_table_style > .table;
+
+            td {
+                #simple_table_style > .cell;
+
+                &:first-child {
+                    #simple_table_style > .header;
+
+                    .row_heading {
+                        #simple_table_style > .header_title;
+                    }
+                }
+            }
+        }
+    }
+
+    .header {
+        background-color: @secondary_grey;
+        font-size: 13px;
+
+        #simple_table_style > ._divider_style;
+    }
+
+    .header_title {
+        text-transform: uppercase;
+        font-size: 17px;
+
+        padding-bottom: 2px;
+        display: block;
+    }
+
+    .cell {
+        padding: 20px 10px;
+        background-color: @primary_grey;
+        #simple_table_style > ._divider_style;
+
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+
+    .table {
+        clear: both;
+        #noths > .add_bottom_gutter;
+        #simple_table_style > ._divider_style_bottom;
+    }
+
+    ._divider_style {
+        #simple_table_style > ._divider_style_bottom;
+        border-top: 1px solid #fff;
+    }
+
+    ._divider_style_bottom {
+        border-bottom: 1px solid #dfdfdd;
+    }
+}
+
+
+#simple_content_style {
+    .base {
+        #content_style > #text_style > .normal;
+        #content_style > #list_style > .deep;
+        #content_style > #link_style > .normal;
+
+        h2 {
+            #site_style > .secondary_title;
+        }
+
+        h3 {
+            #site_style > .tertiary_title;
+
+            a {
+                color: inherit;
+                #links_style > .no_hover_effect;
+            }
+        }
+
+        h2, h2 {
+            float: none;
+            width: auto;
+        }
+
+        p, ol, ul, table {
+            + h3, + h2 {
+                #noths > .pad_top_with_gutter;
+            }
+        }
+
+        a.anchor {
+            color: @standard_text_color;
+            #links_style > .no_hover_effect;
+        }
+
+        img {
+            #noths > .add_bottom_gutter;
+        }
+
+        table {
+            border: 1px solid #aaa;
+
+            td {
+                vertical-align: middle;
+                padding: 5px;
+            }
+
+            thead td {
+                text-align: center;
+                padding: 10px 5px;
+                background-color: #c6c3c1;
+                color: @standard_text_color;
+            }
+
+            // Resets to provide a standard base for #simple_table_style
+            @media @mobile {
+                border: 0;
+
+                td {
+                    padding: 0;
+
+                    br {
+                        display: none;
+                    }
+                }
+            }
+
+            #simple_table_style > .base;
+        }
+
+        img {
+            max-width: 100%;
+        }
+    }
+}
+/*  -  Tooltips styles
+    ------------------------------------------------------------------
+    A set of mixins to deal with tooltip
+
+    Used:
+    - Currently used in listing pages, checkout, signin and my personal data
+ */
+
+// This mixin shows the standard tooltip css rules for the content wrapped
+// used in checkout and sign-in. Listing pages use a different styling
+#tooltip_content_style {
+    .standard(@size) {
+      width: @size;
+      text-align: left;
+      font-size: 12px;
+      color: @grey;
+      padding: 8px 10px;
+
+      p {
+        padding-top: .7em;
+        font-size: 13px;
+      }
+
+      strong {
+        #font_style > .secondary_title;
+        font-size: 16px;
+        display: block;
+        #noths > .add_bottom_gutter;
+      }
+
+      h3 {
+        font-size: 22px;
+        margin-bottom: 16px;
+      }
+    }
+}
+
+// This mixin adds the arrow styling to the tooltip
+// used in sign-in and in the product listing pages
+
+#tooltip_arrow_style {
+    .base {
+        display: block;
+        position: absolute;
+    }
+    .listing {
+        #tooltip_arrow_style  .base;
+        width: 18px;
+        height: 15px;
+        left: 10px;
+        bottom: -15px;
+        padding-right: 0;
+        background: url("/images/shared/backgrounds/blue_standard_tooltip_arrow.png") no-repeat 0 0 transparent;
+    }
+
+    .info {
+        #tooltip_arrow_style  .base;
+        width: 25px;
+        height: 42px;
+        left: -25px;
+        bottom: 58%;
+        background: url("/images/shared/backgrounds/rich_tooltip_arrow.png") no-repeat 0 0 transparent;
+        margin-top: 14px; // tooltip arrow height / 2
+    }
+}
+

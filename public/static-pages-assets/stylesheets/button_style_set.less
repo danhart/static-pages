@@ -1,0 +1,212 @@
+@import "base";
+
+/* -  button styles
+   ------------------------------------------------------------------
+ */
+@large_button_horizontal_padding: 16px;
+@medium_button_horizontal_padding: 16px;
+@small_button_horizontal_padding: 8px;
+@large_primary_button_min_width: 200px;
+@button_border_size: 1px;
+
+#button_style {
+    .two_shadows(@shadow1, @shadow2){
+        -moz-box-shadow: @shadow1, @shadow2;
+        -webkit-box-shadow: @shadow1, @shadow2;
+        box-shadow: @shadow1, @shadow2;
+    }
+
+    .button_shadow(@color) {
+        @inset_color: desaturate(lighten(@color, 10%), 22%);
+        #button_style > .two_shadows(inset 0px 1px 0px @inset_color, 0px 1px 1px rgba(0,0,0,0.3));
+    }
+
+    .button_active_shadow {
+        #noths > .inner_box_shadow(rgba(0,0,0,0.2), 0, 2px, 4px, 0);
+    }
+
+    .button_active_background_color(@color) {
+        background-color: darken(@color, 3%);
+    }
+
+    .button_gradient(@start, @end){
+        #noths > #linear_gradient > .vertical(@start, @end);
+        filter: none; // We remove the gradient for IE <= 9 here because it interferes with the border-radius
+    }
+
+    .button_hover_gradient(@start, @end){
+        @start_hover: desaturate(lighten(@start, 3.5%), 8%);
+        @end_hover:   desaturate(lighten(@end, 3.5%), 8%);
+
+        #button_style > .button_gradient(@start_hover, @end_hover);
+    }
+
+    .mobile {
+        // This is required so that the mobile_hide class still functions
+        // correctly for buttons
+        &.mobile_hide {
+            display: none;
+        }
+
+        &.mobile_only {
+            display: inline-block;
+        }
+
+        &.primary {
+            // This may require refactoring at some point as possibly not all
+            // primary buttons should be 100%
+            width: 100%;
+        }
+    }
+
+    .base {
+        font-family: @button_font;
+        color: #ffffff;
+        text-align: center;
+        margin: 0 auto;
+        #noths > .border_radius;
+        overflow: visible; // IE7 bug fix to remove extra padding
+        cursor: pointer;
+        display: inline-block;
+        text-decoration: none;
+        text-transform: uppercase;
+        line-height: normal;
+
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    // Line-height cannot be used instead of padding due to inconsistent
+    //cross-browser behaviours for input and button elements.
+    .small {
+        @vertical_padding: 5px;
+        @line_height: 16px;
+
+        padding: @vertical_padding @small_button_horizontal_padding;
+        font-size: 12px;
+        border-radius: 4px;
+
+        // Explicit line-height resolves bug in Chrome on Retina screens, where
+        // it is calculated incorrectly.
+        line-height: @line_height;
+
+        // A height is provided even though we have padding, as it provides more
+        // consistent cross-browser behaviour.
+        height: (@vertical_padding * 2) + @line_height + (@button_border_size * 2)
+    }
+
+    .medium {
+        @top_padding: 10px;
+        @bottom_padding: 8px;
+        @total_vertical_padding: @top_padding + @bottom_padding;
+        @line_height: 18px;
+
+        padding: @top_padding @medium_button_horizontal_padding @bottom_padding;
+        font-size: 14px;
+        border-radius: 5px;
+
+        // Explicit line-height resolves bug in Chrome on Retina screens, where
+        // it is calculated incorrectly.
+        line-height: @line_height;
+
+        // A height is provided even though we have padding, as it provides more
+        // consistent cross-browser behaviour.
+        height: @total_vertical_padding + @line_height + (@button_border_size * 2)
+    }
+
+    .large {
+        @top_padding: 14px;
+        @bottom_padding: 12px;
+        @total_vertical_padding: @top_padding + @bottom_padding;
+        @line_height: 20px;
+
+        padding: @top_padding @large_button_horizontal_padding @bottom_padding;
+        font-size: 16px;
+
+        // Explicit line-height resolves bug in Chrome on Retina screens, where
+        // it is calculated incorrectly.
+        line-height: @line_height;
+
+        // A height is provided even though we have padding, as it provides more
+        // consistent cross-browser behaviour.
+        height: @total_vertical_padding + @line_height + (@button_border_size * 2)
+    }
+
+    .button_boilerplate(@top_color, @bottom_color, @border_color) {
+        border: @button_border_size solid @border_color;
+        background-color: @bottom_color;
+        #button_style > .button_shadow(@top_color);
+        #button_style > .button_gradient(@top_color, @bottom_color);
+        color: white;
+
+        &:hover, &.hover {
+            #button_style > .button_hover_gradient(@top_color, @bottom_color);
+        }
+
+        &:active, &.active {
+            background-image: none;
+            #button_style > .button_active_background_color(@top_color);
+            #button_style > .button_active_shadow;
+        }
+    }
+
+    .primary {
+        #button_style > .button_boilerplate(
+            @primary_button_top_color,
+            @primary_button_bottom_color,
+            @primary_button_border_color
+        );
+    }
+
+    .secondary {
+        #button_style > .button_boilerplate(
+            @secondary_button_top_color,
+            @secondary_button_bottom_color,
+            @secondary_button_border_color
+        );
+    }
+
+    .module_end {
+        #noths > .border_top_radius(0);
+        width: 100%;
+        #noths > .add_bottom_gutter;
+        border-top: 0;
+    }
+
+    .button_hover_opacity {
+        &:hover, &.hover {
+            #noths > .opacity(0.8);
+        }
+    }
+
+    .remove_button_styling {
+        border: 0;
+        background: none;
+        text-shadow: none;
+        padding: 0;
+        color: inherit;
+        text-align: left;
+        #noths > .no_box_shadow;
+        #noths > .border_radius(0);
+        letter-spacing: normal;
+        &:hover, &.hover, &:active, &.active {
+            border: 0;
+        }
+    }
+
+    // IE kludges
+    .lt-ie8 {
+        display: inline;
+        box-sizing: content-box;
+    }
+
+    .ie8 {
+        &.large.primary {
+            // min-width and min-height don't play nice with border-box in IE8
+            // Instead it behaves like a content-box
+            min-width: @large_primary_button_min_width - (@large_button_horizontal_padding * 2);
+        }
+    }
+}

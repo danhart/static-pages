@@ -1,0 +1,305 @@
+@import "global_style_set";
+
+@inputs_border_size: 1px;
+@standard_fields_left_column_width: 25%;
+@standard_fields_right_column_width: 75%;
+
+/* -  general style set for standard fields
+   ------------------------------------------------------------------
+ */
+#standard_fields_style {
+    .base {
+        clear: both;
+        #noths > .add_bottom_gutter(2);
+        color: @standard_text_color;
+
+        &.last, &:last-child {
+            margin-bottom: 0;
+        }
+
+        // dep - This can be removed once the responsive checkout A/B test has finished
+        // and deprecated class have been removed
+        &.inputs {
+            width: 100%;
+            float: none;
+        }
+
+        .legend {
+            float: left;
+            margin-bottom: 16px;
+            width: 100%;
+        }
+
+        .label {
+            font-family: @field_label_font;
+            font-size: 15px;
+            text-align: left;
+            margin-bottom: 6px;
+            float: left;
+
+            abbr {
+                color: @error_color;
+                margin-left: -5px;
+                display: none;
+            }
+
+            a {
+                color: @noths_link_color;
+            }
+        }
+
+        .field {
+            position: relative;
+            float: left;
+            display: inline;
+            #noths > .add_bottom_gutter;
+            clear: none;
+
+            &.required .label {
+                abbr {
+                    display: inline;
+                }
+            }
+        }
+
+        @boolean_label_gutter: 30px;
+        // This is used when a label element is the container for the input
+        // element. This is often the case with boolean fields.
+        .containing_inputs {
+            width: auto;
+            padding-top: 0;
+
+            .inputs { width: auto; }
+
+            .label_text {
+                display: block;
+                margin-left: @boolean_label_gutter;
+            }
+        }
+
+        .boolean {
+            line-height: 18px;
+
+            .label {
+                overflow: hidden;
+                text-align: left;
+                margin-left: @boolean_label_gutter;
+                display: block;
+                padding-top: 0;
+                float: none;
+
+                &.containing_inputs {
+                    margin-left: 0;
+                    .label_text {
+                        font-family: @body_font; // don't make it bold
+                    }
+                }
+            }
+
+            input[type=checkbox] {
+                @media @mobile {
+                    -webkit-transform: scale(1.25,1.25);
+                }
+            }
+
+            @media @mobile {
+                #noths > .pad_top_with_gutter;
+                margin-bottom: 0;
+            }
+        }
+
+        .field_copy {
+            font-size: 12px;
+            padding-top: 3px;
+            color: @grey_light;
+
+            @media @mobile {
+                font-size: 13px;
+            }
+        }
+
+        // INPUTS
+        // We differentiate between some input types with an additional class e.g. stringish/boolean
+        .stringish input,
+        textarea,
+        select {
+            float: left;
+            display: inline;
+        }
+
+        .boolean input {
+            float: left;
+            margin: 3px 0.5em 0 0.2em;
+
+            // IE adds padding to boolean inputs causing them to appear
+            // misaligned with their labels
+            padding: 0;
+        }
+
+        textarea {
+            @padding: 5px;
+            padding: @padding;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .fieldset_information {
+            #content_style > #text_style > .normal;
+            float: left;
+            clear: both;
+            width: 100%;
+        }
+
+        // TODO: This only works for the checkout payment page. This is not
+        // desirable and should be fixed.
+        .information {
+            #content_style > #text_style > .normal;
+            float: left;
+
+            p {
+                padding-left: @payment_forms_left_column_width;
+
+                @media @mobile {
+                    font-size: 18px;
+                    padding-left: 0;
+                }
+            }
+        }
+
+        .inline_button_field {
+            float: left;
+        }
+
+        .inline_button {
+            float: right;
+        }
+
+        &.actions {
+            .secondary {
+                #noths > .add_left_gutter;
+
+                @media @mobile {
+                    margin-left: 0;
+                    &.small { display: inline-block; }
+                }
+            }
+        }
+
+        .inline-errors {
+            width: 100%;
+            float: left;
+            clear: both;
+            margin-bottom: 0;
+            #noths > .full_width_for_mobile;
+
+            &.last {
+                #noths > .border_radius(0 0 6px 6px);
+            }
+        }
+
+        .boolean {
+            .inline-errors {
+                &.last {
+                    #noths > .border_radius(6px);
+                }
+            }
+        }
+    }
+
+    // This is a special-case grid for standard_fields. This pattern is not one
+    // we want to reuse going forward and is only being used here as a
+    // stop-gap mechanism.
+    .grid(@left_column_width: @standard_fields_left_column_width, @right_column_width: @standard_fields_right_column_width) {
+        .label {
+            width: @left_column_width;
+            text-align: right;
+            padding-top: 11px;
+            padding-right: 14px;
+            margin-bottom: 0;
+        }
+
+        .field.required .label {
+            padding-right: 8px;
+        }
+
+        .field_copy {
+            #standard_fields_style > .grid > .push_left(@left_column_width, @right_column_width);
+        }
+
+        .field_copy {
+            &.top {
+                #noths > .add_top_gutter(0.5);
+                #noths > .add_bottom_gutter(0.5);
+            }
+        }
+
+        .inputs {
+            float: left;
+            width: @right_column_width;
+        }
+
+        .boolean {
+            #standard_fields_style > .grid > .push_left(@left_column_width, @right_column_width);
+
+            .inputs {
+                width: auto;
+            }
+
+            .label {
+                float: none;
+                width: auto;
+            }
+
+            .field_copy {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        .no_label {
+            .field_copy {
+                margin-left: 0;
+                margin-top: 0px;
+                width: 100%;
+            }
+        }
+
+        &.actions {
+            margin-left: @left_column_width;
+            width: @right_column_width;
+        }
+
+        .push_left(@left_column_width: @standard_fields_left_column_width, @right_column_width: @standard_fields_right_column_width) {
+            margin-left: @left_column_width;
+            width: @right_column_width;
+            float: left;
+            #noths > .full_width_for_mobile;
+
+            @media @mobile {
+                margin-left: 0;
+            }
+        }
+    }
+
+    .remove_grid {
+        .label {
+            width: 100%;
+            clear: both;
+            text-align: left;
+            margin-bottom: 6px;
+            float: left;
+            padding: 0;
+        }
+
+        .inputs {
+            width: 100%;
+        }
+
+        &.actions {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+}

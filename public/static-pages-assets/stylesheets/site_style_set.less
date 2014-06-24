@@ -1,0 +1,1346 @@
+@import "global_style_set";
+
+#font_style {
+    .breadcrumbs {
+        font-family: @no2_regular_font;
+        font-style: normal;
+
+        font-size: 12px;
+        color: #434343;
+    }
+
+    .product_page_title {
+        #font_style > .title;
+        font-size: 32px;
+    }
+
+    .sidebar_module_title {
+        #font_style > .title;
+        font-size: 19px;
+        color: @standard_secondary_title_color;
+
+        a { color: @standard_secondary_title_color; }
+    }
+
+    .sidebar_module_list_item {
+        #font_style > .title;
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .highlighted_sidebar_module_title {
+        #font_style > .sidebar_module_title;
+        color: @standard_secondary_title_color;
+        text-transform: uppercase;
+    }
+
+    .highlighted_sidebar_module_list_item {
+        #font_style > .sidebar_module_list_item;
+    }
+
+    .tab_title {
+        #font_style > .title;
+    }
+}
+
+/* -  general style set for main site
+   ------------------------------------------------------------------
+ */
+#site_style {
+    .show_breadcrumbs {
+        div.breadcrumb {
+            display: block;
+        }
+    }
+
+    // This mixin name is deprecated, use .primary_title instead
+    .primary_section_header {
+        #site_style > .primary_title;
+    }
+
+    // This mixin name is deprecated, use .secondary_title or
+    // .mobile_secondary_title instead
+    .secondary_section_header {
+        #site_style > .mobile_secondary_title;
+    }
+
+    .secondary_link {
+        #font_style > .standard;
+        text-decoration: none;
+
+        &:hover {
+            color: @noths_link_color;
+        }
+    }
+
+    .small_link {
+        line-height: 16px;
+        font-size: 12px;
+    }
+
+    .link_list_item {
+        a {
+            #site_style > .secondary_link;
+        }
+    }
+
+    .header_sub_module_styling {
+        .drop_shadow_overlay {
+            &:before {
+                content: ".";
+                width: 100%;
+                height: 1px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 100;
+                box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+                text-indent: -9999px;
+                display:none;
+            }
+        }
+    }
+
+    .deemphasised {
+        font-size: 12px;
+        color: #999;
+    }
+}
+
+/*  -  tabbed contents
+    ------------------------------------------------------------------
+
+    Used:
+    - homepage tabs
+ */
+
+#tab_style {
+    .header {
+        #font_style > .tab_title;
+        #noths > .add_left_gutter;
+        #noths > .add_right_gutter;
+        font-size: 15px;
+    }
+}
+
+/*  -  link arrow for mobile site
+    ------------------------------------------------------------------
+
+    Used:
+    - mobile_main_navigation, footer
+ */
+#sliding_menu_style {
+    .link {
+        #noths > .pad_sides_with_gutter;
+        border-bottom: 1px solid @tertiary_grey;
+        border-left: 1px solid @tertiary_grey_rgba;
+        font-family: @no2_regular_font;
+        line-height: 55px;
+        color: @noths_grey_link_color;
+        text-decoration: none;
+        display: block;
+        cursor: pointer;
+
+        &:active {
+            background-color: rgba(0,0,0,0.05);
+        }
+    }
+    .top_border_radius {
+        border-radius: 8px 8px 0 0;
+    }
+    .arrow_indicator {
+        background: transparent url(/images/navigation/icons/nav_list_arrow.svg) 95% center no-repeat;
+        background-size: 10px;
+    }
+    .slide_transition {
+        -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.10, 0.10, 0.35, 0.80);
+        transition: transform 0.5s cubic-bezier(0.10, 0.10, 0.35, 0.80);
+    }
+}
+
+/*  -  Noisy background style
+    ------------------------------------------------------------------
+
+    Used:
+    - footer
+ */
+#noisy_background_style {
+    .base(@opacity: 0.2) {
+        position: relative;
+
+        &:after {
+            content: "";
+            background-image: url(/images/footer/backgrounds/footer_sub_list_noise_background.png);
+            opacity: @opacity;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+        }
+    }
+
+    .category_links_noise_background() {
+        background-image: url(/images/shared/backgrounds/category_links_noise_background.png);
+    }
+}
+
+/*  -  Inset sub list style
+    ------------------------------------------------------------------
+    For secondary-level list-items
+
+    Used:
+    - footer
+ */
+#inset_sub_list_style {
+    .base{
+        background: #dbd6cf;
+        box-shadow: inset 0 0 4px 1px rgba(0, 0, 0, 0.1);
+        display: block;
+    }
+
+    .first-child {
+        padding-top: 3px;
+
+        &:before {
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+            right: 0;
+            background: url(/images/footer/backgrounds/footer_sub_list_top_background.png) center top no-repeat;
+            background-size: 100%;
+            height: 4px;
+        }
+    }
+
+    .last-child {
+        padding-bottom: 3px;
+
+        &:after {
+            position: absolute;
+            content: "";
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: url(/images/footer/backgrounds/footer_sub_list_bottom_background.png) center top no-repeat;
+            background-size: 100%;
+            height: 4px;
+        }
+    }
+}
+
+
+/*  -  Sidebar links module styles
+    ------------------------------------------------------------------
+    Used to style the dotted coloured boxes in category sidebars
+
+    Used:
+    - listings in category sidebars
+ */
+#sidebar_links_module_style {
+    .base {
+        #noths > .add_bottom_gutter;
+        #noths > .pad_with_gutter;
+        #skewy_style > .base;
+        #skewy_style > .standard_shadow_color;
+        background: #f6f5f3;
+        float: left;
+        width: 100%;
+
+        @media @mobile {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        h2 {
+            #font_style > .sidebar_module_title;
+            #noths > .add_bottom_gutter;
+            text-transform: lowercase;
+        }
+
+        li {
+            #font_style > .sidebar_module_list_item;
+
+            @media @mobile {
+                border-bottom: 1px solid @standard_divider_color;
+
+                &:last-child {
+                    border-color: transparent;
+                    padding-bottom: 0;
+                    margin-bottom: 0;
+                }
+
+                a { display: block; }
+            }
+        }
+
+        .selected {
+            font-family: @semibold_font;
+        }
+
+        a {
+            #links_style > .blue_hover_effect;
+        }
+
+        .view_all_link {
+            #view_all_style > .view_all_link;
+            float: right;
+        }
+    }
+
+    .highlighted {
+        #skewy_style > .standard_department_color;
+
+        h2, .heading {
+            #font_style > .highlighted_sidebar_module_title;
+            #noths > .add_bottom_gutter;
+        }
+
+        li {
+            #font_style > .highlighted_sidebar_module_list_item;
+        }
+
+        a {
+            #links_style > .blue_hover_effect;
+        }
+
+        .selected {
+            font-family: @semibold_font;
+        }
+    }
+
+    .base, .highlighted {
+        li {
+            @media @mobile {
+                line-height: 40px;
+                font-size: 16px;
+            }
+        }
+
+        @media @mobile {
+            h2, .heading { display: none; }
+        }
+    }
+}
+
+/*  -  Product Item Cells
+    ------------------------------------------------------------------
+    Used to style a product item
+
+    Used:
+    - category pages
+    - recommendations
+    - related items
+    - peerius order complete
+ */
+#product_item_cell_style {
+    .cell_width(@size) {
+        width: @size;
+
+        .cell_image {
+            max-height: @size;
+            height: @size;
+
+            @media @mobile {
+                max-height: none;
+                height: auto;
+            }
+        }
+    }
+
+    .base {
+        float: left;
+        position: relative;
+        font-size: 14px;
+        #noths > .add_bottom_gutter;
+
+        a {
+            text-decoration: none;
+            #links_style > .blue_hover_effect;
+        }
+        .by { margin: 5px 0; }
+
+        .image_legend {
+            display: block;
+            clear: both;
+        }
+
+        .message, .message_sale, .message_new {
+            padding: 0px 6px;
+            position: absolute;
+            right: 20px;
+            top: -8px;
+            max-width: none;
+            color: white;
+            text-align: center;
+            #noths > .border_radius(5px);
+            font-size: 15px;
+            line-height: 26px;
+            z-index: 1;
+
+            @media @mobile {
+                right: 10px;
+                top: -11px;
+            }
+        }
+
+        .message_sale {
+            background-color: @sales_price_color;
+        }
+
+        .message_new {
+            background-color: @dark_primary_color;
+            text-transform: uppercase;
+        }
+
+        .message_free {
+            text-transform: uppercase;
+        }
+
+        .price_grid {
+            display: block;
+            margin: 5px 0;
+            float: left;
+            line-height: 16px;
+        }
+
+        .product_details {
+            margin: 12px 0 5px;
+        }
+
+        .price, .new_price {
+            font-size: 21px;
+            font-family: @price_font;
+        }
+
+        .new_price {
+            color: @sales_price_color;
+        }
+
+        .old_price {
+            font-size: 15px;
+            text-decoration: line-through;
+            float: left;
+            line-height: 8px;
+            padding: 3px 3px 0px 0px;
+        }
+
+        .product_award_small {
+            position: absolute;
+            top: -10px;
+            right: 16px;
+            width: 74px;
+            height: 31px;
+        }
+
+        .made_to_order {
+            height: 16px;
+            width: 100px;
+            background: transparent url(/images/products/titles/made_to_order@2.png) left top no-repeat;
+            background-size:100%;
+            text-indent: -9999px;
+            float: left;
+            clear: both;
+        }
+
+        .can_be_personalised {
+            float: left;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .cell_image {
+            display: block;
+            #noths > .solid_drop_shadow;
+            overflow: hidden;
+
+            .product_link {
+                display: block;
+            }
+
+            .product_image, img {
+                width: 100%;
+                height: auto;
+                display: block;
+
+                // Used by the NOTHS.ProductImageGravity JS
+                position: relative;
+            }
+        }
+
+        @media @mobile {
+            height: auto;
+            max-height: none;
+            width: 50%;
+            margin-right: 0;
+        }
+
+        &.end {
+            margin-right: 0;
+        }
+    }
+
+    .medium_product, .large_product {
+        #noths > .add_right_gutter;
+        #product_item_cell_style > .small_price;
+
+        .product_details {
+            font-family: @product_listings_product_font;
+        }
+    }
+
+    .large_product {
+        #product_item_cell_style > .cell_width(229px);
+
+        .product_details {
+            font-size: 16px;
+            line-height: 20px;
+        }
+    }
+
+    // used for 4 per row grid on dept page's featured categories
+    .medium_product {
+        #product_item_cell_style > .cell_width(168px);
+
+        .product_details {
+            font-size: 14px;
+        }
+    }
+
+    .personalised_text {
+        color: #888;
+        display: inline-block;
+        margin-left: -9px;
+        padding-top: 2px;
+        vertical-align: top;
+        font-size: 13px;
+
+        @media @mobile {
+            font-size: 11px;
+        }
+    }
+
+    .mobile_product {
+        #product_item_cell_style > .small_price;
+
+        .product_details {
+            font-family: @product_listings_product_font;
+        }
+
+        .product_details {
+            font-size: 16px;
+            line-height: 20px;
+        }
+    }
+
+    .small_price {
+        .price, .new_price {
+            font-size: 14px;
+            #price_format > .base;
+        }
+    }
+}
+
+#product_grid_style {
+    .mobile_base {
+        width:100%;
+        float: left;
+
+        /*
+            this is a bit convoluted because of how the items are currently structured.
+
+            currently, cells are contained within rows in the following configuration:
+            { [ A ] [ B ] [ C ] }
+            { [ d ] [ e ] [ f ] }
+            { [ G ] [ H ] [ I ] }
+            { [ j ] [ k ] [ l ] }
+
+            without changing the structure, we want the following design:
+
+            [ A ] [ B ]
+            [ C ] [ d ]
+            [ e ] [ f ]
+            [ G ] [ H ]
+            [ I ] [ k ]
+            [ l ] [ m ]
+
+            hence:
+            - for each odd row, the odd cell (1 + 3) would be on the left
+            - for each even row, the even cell (2) would be on the left
+            - all other cells are on the right
+        */
+        .cell {
+            #noths > .mobile_pad_left_with_gutter;
+            padding-right: 0;
+        }
+        .products_row:nth-child(odd) .cell:nth-child(odd){
+            #noths > .mobile_pad_right_with_gutter;
+            padding-left: 0;
+            clear: both;
+        }
+        .products_row:nth-child(even) .cell:nth-child(even){
+            #noths > .mobile_pad_right_with_gutter;
+            padding-left: 0;
+            clear: both;
+        }
+    }
+}
+
+#light_carousel_style {
+    #control {
+        .base {
+            height: 32px;
+            width: 32px;
+            position: absolute;
+            text-indent: -9999px;
+            #noths > .border_radius(6px);
+            background-color: @standard_secondary_color;
+            background-repeat: no-repeat;
+            background-size: 18px 18px;
+            cursor: pointer;
+        }
+
+        .center_vertical {
+            top: 50%;
+            margin-top: -26px;
+        }
+
+        .left, .right {
+            background-position: 50% 50%;
+        }
+
+        .left {
+            background-image: url('/images/shared/icons/carousel_chevron_left.svg');
+            left: 0;
+            .no_svg & { background-image: url('/images/shared/icons/carousel_chevron_left.png'); }
+        }
+
+        .right {
+            background-image: url('/images/shared/icons/carousel_chevron_right.svg');
+            right: 0;
+            .no_svg & { background-image: url('/images/shared/icons/carousel_chevron_right.png'); }
+        }
+
+        .up {
+            background-image: url('/images/shared/icons/carousel_chevron_up.svg');
+            .no_svg & { background-image: url('/images/shared/icons/carousel_chevron_up.png'); }
+        }
+
+        .down {
+            background-image: url('/images/shared/icons/carousel_chevron_down.svg');
+            .no_svg & { background-image: url('/images/shared/icons/carousel_chevron_down.png'); }
+        }
+
+        .disabled {
+            #noths > .opacity(0.5);
+        }
+    }
+}
+
+#pagination_style {
+    .base {
+        p { margin-bottom: 0; }
+    }
+    .indicator {
+        display: inline-block;
+        height: 12px;
+        min-width: 12px;
+        margin-right: 7px;
+        background-color: @tertiary_grey;
+        cursor: pointer;
+        #noths > .border_radius(6px);
+
+        &.active, &.flex-active {
+            background-color: @standard_secondary_color
+        }
+    }
+    .ie_image_indicator {
+        background-color: transparent;
+        background-image: url('/images/carousel/icons/recent_page_circle.png');
+        background-repeat: no-repeat;
+        width: 14px;
+        height: 14px;
+
+        &.active, &.flex-active {
+            background-color: transparent;
+            background-image: url('/images/carousel/icons/recent_page_circle_blue.png');
+        }
+    }
+    .carousel_control {
+        #light_carousel_style > #control > .base;
+    }
+
+    .carousel_control_light {
+        #light_carousel_style > #control > .base;
+
+        &.carousel_previous {
+            #light_carousel_style > #control > .left;
+            left: 9px;
+        }
+
+        &.carousel_next {
+            #light_carousel_style > #control > .right;
+            right: 9px;
+        }
+
+        &.disabled {
+            #light_carousel_style > #control > .disabled;
+        }
+    }
+
+    .carousel_control_vertical {
+        &.carousel_previous {
+            #light_carousel_style > #control > .up;
+        }
+
+        &.carousel_next {
+            #light_carousel_style > #control > .down;
+        }
+    }
+}
+
+#flyout_style {
+    .base {
+        margin-bottom: 0;
+    }
+
+    .title {
+        #site_style > .mobile_secondary_title;
+        display: block;
+        #noths > .add_bottom_gutter;
+    }
+
+    .inset_division {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+        border-top: 1px solid rgba(255,255,255,0.45);
+    }
+}
+
+#desktop_flyout_modules_style {
+    .base {
+        #noths > .standard_bottom_border;
+        font-size: 13px;
+    }
+
+    .small_heading {
+        #font_style > .module_title;
+        font-size: 14px;
+        float: left;
+        width: 100%;
+        #noths > .add_bottom_gutter;
+    }
+}
+
+#heading_icon_style {
+    .base {
+        position: relative;
+
+        &:after {
+            content: "";
+            position: absolute;
+            right: 20px;
+            width: 32px;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            display: block;
+            height: 32px;
+            top: 5px;
+        }
+    }
+    .icon(@icon){
+        &:after{
+            background-image: url(@icon);
+        }
+    }
+}
+
+#grey_links_group_style {
+    .base {
+        #flyout_style > .base;
+        #noths > .mobile_pull_out_into_container_gutter;
+        float: none;
+        width: auto;
+        clear: both;
+    }
+
+    .main_heading {
+        background-color: @dark_primary_color;
+        color: white;
+        text-transform: uppercase;
+    }
+
+    .heading {
+        #noths > .mobile_pad_sides_with_gutter(2);
+        #grey_links_group_style > .inset_division;
+        line-height: 43px;
+        font-size: 17px;
+        background-color: @secondary_grey;
+        color: @standard_text_color;
+    }
+
+    .inset_division { #flyout_style > .inset_division; }
+}
+
+#expand_content_arrows_style {
+    .base {
+        position: relative;
+
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: transparent url(/images/shared/icons/expand_arrow_down.svg) center center no-repeat;
+            width: 32px;
+            height: 100%;
+            background-size: 100%;
+        }
+    }
+
+    .with_indentation {
+        #expand_content_arrows_style > .base;
+
+        &:after { right: 15px; }
+    }
+
+    .expanded {
+        &:after {
+            background-image: url(/images/shared/icons/expand_arrow_up.svg);
+        }
+    }
+}
+
+/*  -  Info copy styles
+    ------------------------------------------------------------------
+    Mainly used for the "SEO" copy at the end of the main content
+
+    Used:
+    - .read_more_content_module, .tabbed_content_module
+ */
+#mobile_info_copy_style {
+    .base {
+        #site_style > .deemphasised;
+    }
+
+    .read_more_link {
+        float: none;
+        position: static;
+        display: inline;
+        font-size: 13px;
+    }
+
+    .home_page_read_more_link {
+        #mobile_info_copy_style > .read_more_link;
+    }
+}
+
+/*  -  Carousel on homepage and product page
+    ------------------------------------------------------------------
+    Used for the main image
+*/
+#mobile_carousel_module_style {
+    .base {
+        zoom: 1;
+        margin: 0 -3px;
+
+        ul {
+            zoom: 1;
+
+            li {
+                zoom: 1;
+                position: relative;
+                margin-bottom: 3px;
+            }
+        }
+    }
+    .carousel_item {
+        zoom: 1;
+        padding: 3px;
+        display: block;
+
+        img {
+            zoom: 1;
+            #noths > .solid_transparent_drop_shadow;
+            min-height: 280px;
+        }
+    }
+}
+
+#quantity_input_style {
+    .base {
+        background-color: #fff;
+        text-align: center;
+        border: 0;
+        padding: 0;
+        #noths > .border_radius;
+        #noths > .inner_shadow(rgba(0,0,0,0.4), 0px, 1px, 5px, 0);
+        font-size: 13px;
+    }
+}
+
+/* -  hat band colours
+------------------------------------------------------------------
+*/
+
+// This mixin generates the hat band color based on the category slug
+//
+// This requires a corresponding department color variable in
+// variables.less e.g.
+// @given-dept_hat_band_color: #555;
+//
+.department_hat_band_color(@department){
+    @hat_band_color: "@{department}_hat_band_color";
+
+    border-color: @@hat_band_color;
+}
+
+// This mixin generates the header color based on the category slug
+//
+// This requires a corresponding department color variable in
+// variables.less e.g.
+// @given-dept_primary_header_color: #333;
+//
+.department_primary_heading_title_color(@department){
+    @header_color: "@{department}_primary_title_color";
+
+    color: @@header_color;
+}
+
+.department_nav_text_color(@department){
+    @hat_band_color: "@{department}_hat_band_color";
+    color: @@hat_band_color;
+}
+
+.featured_category_group_heading_band_color(desktop, @department) {
+    @secondary_color: "@{department}_secondary_color";
+
+    #noths > #linear_gradient > .horizontal(darken(@@secondary_color, 15%), #434343);
+
+    &:hover {
+        #noths > #linear_gradient > .horizontal(@@secondary_color, #434343);
+    }
+}
+
+.featured_category_group_heading_band_color(mobile, @department) {
+    @header_color: "@{department}_primary_title_color";
+
+    color: @@header_color;
+}
+
+
+// This mixin deals with setting up the dept specific colours
+//
+// This is driven off the body class, which are based on
+// the category slug
+.department_color(all, @department){
+    &.@{department}_department {
+        @department_color: "@{department}_primary_title_color";
+        .department_hat_band_color(@department);
+
+        .page_title {
+            .department_primary_heading_title_color(@department);
+        }
+
+        .category.highlighted:before, .sidebar_links_module.highlighted:before {
+            background-color: @@department_color;
+        }
+    }
+}
+
+.department_color(desktop, @department){
+    &.@{department}_department {
+        @hat_band_color: "@{department}_hat_band_color";
+        @band_height: 5px;
+
+        .mega_drop_down_module .@{department}_dropmenu > .title {
+            top: -@band_height;
+        }
+
+        .mega_drop_down_module .@{department}_dropmenu > .title:before {
+            position: relative;
+            width: 100%;
+            height: @band_height;
+            background-color: @@hat_band_color;
+            content: "";
+            top: 27px;
+            display: block;
+        }
+
+        .mega_drop_down_module .@{department}_dropmenu > .title:after {
+            bottom: -@mdd_title_border_bottom_cover_element_height + -@band_height;
+        }
+
+        .featured_category_group_module > header {
+            .featured_category_group_heading_band_color(desktop, @department);
+        }
+    }
+
+    .mega_drop_down_module .@{department}_dropmenu .drop .title {
+        .department_nav_text_color(@department);
+    }
+}
+
+.department_color(mobile, @department){
+    &.@{department}_department {
+        .featured_category_group_module .featured_category_group_title a {
+            .featured_category_group_heading_band_color(mobile, @department);
+        }
+    }
+}
+
+.department_colours(@media: all) {
+    .department_color(@media, home);
+    .department_color(@media, garden);
+    .department_color(@media, fashion);
+    .department_color(@media, jewellery);
+    .department_color(@media, baby-child);
+    .department_color(@media, art);
+    .department_color(@media, gifts);
+    .department_color(@media, weddings);
+    .department_color(@media, health-beauty);
+    .department_color(@media, food-drink);
+    .department_color(@media, pets);
+    .department_color(@media, sale);
+    .department_color(@media, christmas);
+
+    // DE Department colours
+    .department_color(@media, wohnen);
+    .department_color(@media, geschenke);
+    .department_color(@media, baby-kind);
+    .department_color(@media, damen);
+    .department_color(@media, herren);
+}
+
+#partner_link_style {
+    .base {
+        a {
+            #links_style > .blue_without_hover_effect;
+            font-family: @partner_link_font;
+            text-transform: uppercase;
+        }
+    }
+}
+
+#listing_filter_module_style {
+    .base {
+        #flyout_style > .base;
+
+        .filter_list li a, .filter_name {
+            #hierarchical_list_style > .item
+        }
+
+        .filter_name {
+            #hierarchical_list_style > .shaded_item;
+
+            // This could potentially be extracted into default styling for the
+            // expandable jQuery plugin
+            background-image: url(/images/shared/icons/expand_arrow_down.svg);
+            background-size: 32px;
+            background-repeat: no-repeat;
+            background-position: 96% center;
+            cursor: pointer;
+
+            // No reset filters link on mobile for the moment
+            a { display: none; }
+        }
+
+        .checkbox_label {
+            margin-left: 25px;
+        }
+
+        // This could potentially be extracted into default styling for the
+        // expandable jQuery plugin
+        &.expanded {
+            .expandable { display: block; }
+
+            .filter_name {
+                background-image: url(/images/shared/icons/expand_arrow_up.svg);
+            }
+        }
+
+        .expandable {
+            display: none;
+        }
+
+        .filter_list li {
+            img {
+                float: left;
+            }
+
+            .tooltip {
+                display: none;
+            }
+        }
+    }
+}
+
+#product_filters_module_style {
+    .base {
+        margin-bottom: 0;
+        #flyout_style > .base;
+
+        > .module_title {
+            #flyout_style > .title;
+            #noths > .mobile_add_side_gutter;
+            #noths > .add_top_gutter;
+            clear: both;
+        }
+
+        // To provide separation with the first child module
+        > .module_title + .module {
+            border-top: 1px solid @tertiary_grey;
+        }
+    }
+}
+
+#hierarchical_list_style {
+    .item {
+        #noths > .mobile_pad_sides_with_gutter(2);
+        display: block;
+        padding-top: 11px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid @tertiary_grey;
+        overflow: hidden;
+    }
+
+    .shaded_item {
+        background-color: @primary_grey;
+    }
+}
+
+#cart_listing_mobile_style {
+    /* -  general resets
+    ------------------------------------------------------------------
+    */
+    .product_table {
+        display: block;
+
+        tbody {
+            display: block;
+        }
+        thead, .header {
+            display: none;
+        }
+    }
+
+
+    /*  -  Order Item Line
+        ------------------------------------------------------------------
+        This is used to represent an order line on the cart page
+     */
+    .product_row {
+        float: left;
+        width: 100%;
+        position: relative;
+        #noths > .add_bottom_gutter;
+        #noths > .solid_transparent_drop_shadow;
+        border: 1px solid @border_color;
+
+        &.info_text {
+            box-shadow: none;
+            -webkit-box-shadow: none;
+        }
+    }
+
+    /*  -  Order Product Item
+        ------------------------------------------------------------------
+        This is used to represent an product on an order line
+     */
+    @border_color: @standard_divider_color;
+    @background_color: #fff;
+    @product_module_gutter: 10px;
+    @product_image_size: 92px;
+    .product_cell {
+        padding: 10px 0;
+        background: @background_color;
+        float: left;
+        width: 100%;
+        border-bottom: 1px solid @border_color;
+    }
+
+    /*  -  Product details
+        ------------------------------------------------------------------
+        This is used to deal with the main product details
+        i.e. the top section of a order item
+    */
+    .product_details {
+        .thumbnail {
+            float: left;
+            margin: 0 10px 33px;
+
+            a {
+                border: 1px solid @border_color;
+                display: block;
+            }
+            img {
+                display: block;
+            }
+        }
+        .productDetails{
+            margin-left: @product_image_size + @product_module_gutter * 2;
+            margin-right: @product_module_gutter;
+
+            p {
+                margin-bottom: 0;
+
+            }
+
+            #content_style > #link_style > .normal;
+
+            .name {
+                display: block;
+                margin-bottom: 3px;
+
+                a {
+                    color: @standard_text_color;
+                    font-size: 18px;
+                }
+            }
+            .partner {
+                display: block;
+                font-size: 16px;
+
+                &:before {
+                    content: "by ";
+                    color: @standard_text_color;
+                    font-size: 13px;
+                }
+            }
+            .options {
+                background: @background_color;
+                font-size: 12px;
+                line-height: 1.45;
+                color: #9D9D9B;
+            }
+        }
+    }
+
+
+    /*  -  Product details footer
+        ------------------------------------------------------------------
+        This is used to deal with the footer for a product item
+        i.e. the controls and price
+    */
+    .product_details_footer {
+        @input_container_height: 60px;
+
+        td.price {
+            display: none;
+        }
+
+        p.price {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .before_label, .label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+            padding: 0;
+            line-height: 1.2;
+            color: #999;
+            font-size: 13px;
+        }
+
+        .qty {
+            width:50%;
+            clear: left;
+            position: relative;
+
+            input, .decrease_quantity_link, .decrease_number_button,
+                .increase_quantity_link, .increase_number_button {
+                height: (@input_container_height - 1px);
+                float: left;
+                border: 0;
+                border-right: 1px solid @border_color;
+            }
+            input {
+                width: 64px;
+                background: @background_color;
+                border-radius: 0;
+                text-align: right;
+                padding: 24px 5px 0;
+                font-size: 22px;
+                color: #8a8480;
+                vertical-align: middle;
+                -webkit-appearance: none;
+            }
+            br { display: none;}
+
+            .decrease_quantity_link, .decrease_number_button,
+                .increase_quantity_link, .increase_number_button {
+                width: 37px;
+                background-repeat: no-repeat;
+                background-size: 17px;
+                background-position: center 32px;
+                text-indent: -999em;
+
+                img { display: none; }
+            }
+
+            .decrease_quantity_link, .decrease_number_button {
+                background-image: url("/images/shared/icons/qty_minus_mobile.svg");
+            }
+
+            .increase_quantity_link, .increase_number_button {
+                background-image: url("/images/shared/icons/qty_add_mobile.svg");
+            }
+        }
+        .total {
+            width:50%;
+            text-align: right;
+            padding-right: 10px;
+            font-size: 22px;
+            color: @standard_text_color;
+            padding-top: 28px;
+        }
+        .qty, .total {
+            position: relative;
+            float: left;
+            background: @background_color;
+            height: @input_container_height;
+        }
+        .remove {
+            position: absolute;
+            top: 116px;
+            left: 30px;
+
+            .remove_item_button {
+                #links_style > .blue_with_underline_hover_effect;
+                font-size: 11px;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    @border_color: @standard_divider_color;
+    .info_text {
+        /*  -  general order info/delivery text
+        ------------------------------------------------------------------
+        This is used to deal with the order info/delivery copy
+        i.e. the copy describing general and delivery information for an order
+    */
+        .conversion_text {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid @border_color;
+            padding: 0 0 16px;
+
+            p { margin-bottom: 0; }
+
+            &, a {
+                line-height: 1.3;
+                font-size: 14px;
+            }
+
+            a { #links_style > .blue_with_underline_hover_effect; }
+        }
+        &:after { display: none; }
+    }
+}
