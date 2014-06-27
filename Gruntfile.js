@@ -40,7 +40,8 @@ module.exports = function(grunt) {
                     dir: 'build/static-pages-assets/scripts',
                     skipDirOptimize: true,
                     modules: [
-                        { name: 'test' }
+                        { name: 'test' },
+                        { name: 'make_awards_2014' }
                     ]
                 }
             }
