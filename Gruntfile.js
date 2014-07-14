@@ -25,12 +25,18 @@ module.exports = function(grunt) {
             }
         },
         copy: {
-            main: {
+            images: {
                 expand: true,
                 cwd: 'public/static-pages-assets/images/',
                 src: '**',
                 dest: 'build/static-pages-assets/images/'
             },
+            fonts: {
+                expand: true,
+                cwd: 'public/static-pages-assets/fonts/',
+                src: '**',
+                dest: 'build/static-pages-assets/fonts/'
+            }
         },
         requirejs: {
             compile: {
