@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var layoutFetcher = require('layout-fetcher');
 
 var appConfig = require('./app-config');
+var assetsHelper = require('./view-helpers/assets-helper');
 
 var routes = require('./routes/index');
 
@@ -30,11 +31,15 @@ app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 
-app.use(express.static(path.join(__dirname, appConfig.publicDir)));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(layoutFetcher(appConfig.nothsLayoutUrl, {
     cacheLayout: appConfig.cacheLayout
 }));
+
+app.use(require('./middleware/setup-layout')());
+
+app.locals.assetUrl = assetsHelper.assetUrl;
 
 app.use('/', routes);
 

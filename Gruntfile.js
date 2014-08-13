@@ -6,9 +6,9 @@ module.exports = function(grunt) {
             compile: {
                 files: [{
                     expand: true,
-                    cwd: 'public/',
+                    cwd: 'public/styles/',
                     src: ['**/*.styl'],
-                    dest: 'build/',
+                    dest: 'public/build/styles/',
                     ext: '.css',
                 }]
             }
@@ -17,37 +17,22 @@ module.exports = function(grunt) {
             compile: {
                 files: [{
                     expand: true,
-                    cwd: 'public/',
+                    cwd: 'public/styles/',
                     src: ['**/*.less'],
-                    dest: 'build/',
+                    dest: 'public/build/styles/',
                     ext: '.css',
-                }]
-            }
-        },
-        copy: {
-            images: {
-                expand: true,
-                cwd: 'public/static-pages-assets/images/',
-                src: '**',
-                dest: 'build/static-pages-assets/images/'
-            },
-            fonts: {
-                expand: true,
-                cwd: 'public/static-pages-assets/fonts/',
-                src: '**',
-                dest: 'build/static-pages-assets/fonts/'
+                }],
+                options: {
+                    compress: true
+                }
             }
         },
         requirejs: {
             compile: {
                 options: {
-                    appDir: 'public/static-pages-assets/scripts/',
-                    baseUrl: "./",
-                    dir: 'build/static-pages-assets/scripts',
-                    skipDirOptimize: true,
-                    modules: [
-                        { name: 'test' }
-                    ]
+                    baseUrl: 'public/scripts',
+                    name: "static-main",
+                    out: "public/build/scripts/static-main.js"
                 }
             }
         }
@@ -56,8 +41,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-stylus');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['stylus', 'less', 'requirejs', 'copy']);
-
+    grunt.registerTask('default', ['stylus', 'less', 'requirejs']);
 };

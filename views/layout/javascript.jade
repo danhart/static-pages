@@ -1,0 +1,10 @@
+script.
+  require.config({
+      paths: {
+        'static-main': "#{assetUrl('/scripts/static-main')}"
+      }
+  });
+
+  require(['static-main'], function(staticMain) {
+    staticMain.init();
+  });

@@ -4,14 +4,16 @@ var config = {
     cacheLayout:    false,
     nothsLayoutUrl: 'http://www.notonthehighstreet.com/layout',
     nothsApiUri:    'https://www.notonthehighstreet.com/api',
+    assetHost:      'http://static-pages.notonthehighstreet.com',
+    assetPath:      '/build',
     loggerMode:     '',
-    publicDir:      'build'
 };
 
 if (env === 'development') {
     config.cacheLayout = true;
     config.loggerMode = 'dev';
-    config.publicDir = 'public';
+    config.assetHost = '';
+    config.assetPath = '';
 }
 
 if (process.env.CACHE_LAYOUT) {
@@ -20,6 +22,10 @@ if (process.env.CACHE_LAYOUT) {
 
 if (process.env.LAYOUT) {
     config.nothsLayoutUrl = process.env.LAYOUT;
+}
+
+if (process.env.ASSET_PATH) {
+    config.assetPath = process.env.ASSET_PATH;
 }
 
 module.exports = config;
