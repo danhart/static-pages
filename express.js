@@ -11,8 +11,6 @@ var appConfig = require('./app-config');
 
 var routes = require('./routes/index');
 
-var layoutService = require('./services/layout-service');
-
 var app = express();
 
 // view engine setup
@@ -31,12 +29,8 @@ app.use(lessMiddleware(path.join(__dirname, 'public')));
 
 app.use(express.static(path.join(__dirname, appConfig.publicDir)));
 
-app.use(layoutFetcher({
-    url:         appConfig.nothsLayoutUrl,
-    cacheLayout: appConfig.cacheLayout,
-    done:        function(layout) {
-        layoutService.layout = layout;
-    }
+app.use(layoutFetcher(appConfig.nothsLayoutUrl, {
+    cacheLayout: appConfig.cacheLayout
 }));
 
 app.use('/', routes);
