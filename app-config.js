@@ -1,12 +1,11 @@
 var env = process.env.NODE_ENV || 'development';
 
 var config = {
-    cacheLayout:    false,
-    nothsLayoutUrl: 'http://www.notonthehighstreet.com/layout',
-    nothsApiUri:    'https://www.notonthehighstreet.com/api',
-    assetHost:      'http://static-pages.notonthehighstreet.com',
-    assetPath:      '/build',
-    loggerMode:     '',
+    cacheLayout: false,
+    nothsApiUri: 'https://www.notonthehighstreet.com/api',
+    assetHost:   'http://static-pages.notonthehighstreet.com',
+    assetPath:   '/build',
+    loggerMode:  '',
 };
 
 if (env === 'development') {
