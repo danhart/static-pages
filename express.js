@@ -5,8 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var lessMiddleware = require('less-middleware');
 var bodyParser = require('body-parser');
-var layoutFetcher = require('layout-fetcher');
 
+var nothsLayoutFetcher = require('./middleware/noths-layout-fetcher');
 var appConfig = require('./app-config');
 var assetsHelper = require('./view-helpers/assets-helper');
 
@@ -33,7 +33,7 @@ app.use(lessMiddleware(path.join(__dirname, 'public')));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(layoutFetcher(appConfig.nothsLayoutUrl, {
+app.use(nothsLayoutFetcher({
     cacheLayout: appConfig.cacheLayout
 }));
 
