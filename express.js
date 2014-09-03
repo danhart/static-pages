@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var lessMiddleware = require('less-middleware');
 var bodyParser = require('body-parser');
+var browserify = require('browserify-middleware');
 
 var nothsLayoutFetcher = require('./middleware/noths-layout-fetcher');
 var appConfig = require('./app-config');
@@ -27,8 +28,17 @@ app.use(logger(appConfig.loggerMode));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-app.use(require('stylus').middleware(path.join(__dirname, 'public')));
-app.use(lessMiddleware(path.join(__dirname, 'public')));
+
+app.use(lessMiddleware(path.join(__dirname, 'client', 'less'), {
+    dest: path.join(__dirname, 'public'),
+    preprocess: {
+        path: function(pathname, req) {
+            return pathname.replace('/styles/', '/');
+        }
+    }
+}));
+
+app.get('/scripts/main.js', browserify('./client/js/main.js'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -39,7 +49,7 @@ app.use(nothsLayoutFetcher({
 // TODO: Extract out as asset management middleware
 app.use(function(req, res, next) {
     res.locals.assetUrl = function(path) {
-        return appConfig.assetUrl + appConfig.assetPath + path;
+        return appConfig.assetUrl + path;
     };
 
     next();
