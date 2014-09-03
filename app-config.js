@@ -3,7 +3,7 @@ var env = process.env.NODE_ENV || 'development';
 var config = {
     cacheLayout: false,
     nothsApiUri: 'https://www.notonthehighstreet.com/api',
-    assetHost:   'http://static-pages.notonthehighstreet.com',
+    assetUrl:   '//static-pages.notonthehighstreet.com',
     assetPath:   '/build',
     loggerMode:  '',
 };
@@ -11,7 +11,7 @@ var config = {
 if (env === 'development') {
     config.cacheLayout = true;
     config.loggerMode = 'dev';
-    config.assetHost = '';
+    config.assetUrl = '';
     config.assetPath = '';
 }
 

@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 
 var nothsLayoutFetcher = require('./middleware/noths-layout-fetcher');
 var appConfig = require('./app-config');
-var assetsHelper = require('./view-helpers/assets-helper');
 
 var routes = require('./routes/index');
 
@@ -37,9 +36,16 @@ app.use(nothsLayoutFetcher({
     cacheLayout: appConfig.cacheLayout
 }));
 
-app.use(require('./middleware/setup-layout')());
+// TODO: Extract out as asset management middleware
+app.use(function(req, res, next) {
+    res.locals.assetUrl = function(path) {
+        return appConfig.assetUrl + appConfig.assetPath + path;
+    };
 
-app.locals.assetUrl = assetsHelper.assetUrl;
+    next();
+});
+
+app.use(require('./middleware/setup-layout')());
 
 app.use('/', routes);
 
