@@ -1,0 +1,45 @@
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+* {*behavior: url(/javascripts/boxsizing.htc);}
+
+/* ==================================================================
+   resets
+   ================================================================== */
+body,
+h1,h2,h3,h4,h5,h6,
+p,blockquote,pre,
+dl,dd,ol,ul,
+form,fieldset,legend,
+table,th,td,caption,
+figure,
+hr{
+    margin:0;
+    padding:0;
+}
+h1, h2, h3, h4, h5, ul, ol, li { margin: 0; padding: 0; }
+ol, ul { list-style-type: none; }
+fieldset, img { border: 0; }
+table{ border-collapse:collapse; border-spacing:0; }
+input,
+select,option,optgroup,
+textarea{
+    font:inherit;
+}
+label,
+input[type=button],
+input[type=submit],
+button{
+    cursor: pointer;
+}
+:focus {
+    outline: 0;
+
+    // Remove orange outline on Android
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+textarea { margin: 0; }
+
+// removing default font-weight as this is handled via our custom fonts
+strong, b, h1, h2, h3, h4, h5 {
+    font-weight: normal;
+}
+
