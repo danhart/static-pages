@@ -21,8 +21,8 @@ if (process.env.LAYOUT) {
     config.nothsLayoutUrl = process.env.LAYOUT;
 }
 
-if (process.env.ASSET_PATH) {
-    config.assetPath = process.env.ASSET_PATH;
+if (process.env.ASSET_URL) {
+    config.assetUrl = process.env.ASSET_URL;
 }
 
 module.exports = config;
