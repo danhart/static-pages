@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 var testController = require('./controllers/test-controller');
 
 var init = function() {
