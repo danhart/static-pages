@@ -29,16 +29,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
-app.use(lessMiddleware(path.join(__dirname, 'client', 'less'), {
-    dest: path.join(__dirname, 'public'),
-    preprocess: {
-        path: function(pathname, req) {
-            return pathname.replace('/styles/', '/');
+if (app.get('env') === 'development') {
+    app.use(lessMiddleware(path.join(__dirname, 'client', 'less'), {
+        dest: path.join(__dirname, 'public'),
+        preprocess: {
+            path: function(pathname, req) {
+                return pathname.replace('/styles/', '/');
+            }
         }
-    }
-}));
+    }));
 
-app.get('/scripts/main.js', browserify('./client/js/main.js'));
+    app.get('/scripts/main.js', browserify('./client/js/main.js'));
+}
 
 app.use(express.static(path.join(__dirname, 'public')));
 

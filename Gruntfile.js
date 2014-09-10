@@ -9,10 +9,22 @@ module.exports = function(grunt) {
                     compress: true
                 }
             }
+        },
+        browserify: {
+            compile: {
+                files: { "public/scripts/main.js": "client/js/main.js" },
+            }
+        },
+        uglify: {
+            main: {
+                files: { "public/scripts/main.js": "public/scripts/main.js" }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    grunt.registerTask('default', ['less']);
+    grunt.registerTask('default', ['less', 'browserify', 'uglify']);
 };
